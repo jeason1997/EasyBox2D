@@ -1,0 +1,28 @@
+{
+  "ver": "1.0.0",
+  "uuid": "fab56a16-d34f-49a7-b2d4-2812895543eb",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "RedMonster": {
+      "ver": "1.0.2",
+      "uuid": "993767db-2752-4b8b-9cc1-16fd133db4e9",
+      "rawTextureUuid": "fab56a16-d34f-49a7-b2d4-2812895543eb",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 68,
+      "height": 75,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

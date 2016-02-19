@@ -1,0 +1,24 @@
+{
+  "name": "Box2D",
+  "version": "1.0.1",
+  "description": "Box2D For CocosCreator.",
+  "author": "Jeason1997",
+  "main": "main.js",
+  "menus": {
+    "i18n:Box2D.Editor.menu_ingame": {
+      "message": "main-panel:open"
+    }
+  },
+  "panels": {
+    "panel": {
+      "frame": "panel/panel.html",
+      "type": "dockable",
+      "title": "i18n:Box2D.Editor.inGamePanel",
+      "width": 960,
+      "height": 640,
+      "messages": [
+        "physics:run"
+      ]
+    }
+  }
+}

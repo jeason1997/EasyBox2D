@@ -1,0 +1,27 @@
+<dom-module id="box2d-creator">
+    <template>
+        <style>
+            :host {
+                @apply(--layout-vertical);
+                overflow: auto;
+            }
+            
+            .wrapper {
+                position: relative;
+            }
+            
+            .border {
+                border: 1px solid #171717;
+                background: #333;
+            }
+        </style>
+        <div class="wrapper flex-1">
+            <div class="border fit">
+                <iframe src="http://localhost:7456/" width="1000" height="600"></iframe>
+            </div>
+        </div>
+    </template>
+    <script>
+        Editor.registerPanel('Box2D.panel', {});
+    </script>
+</dom-module>
