@@ -11,28 +11,26 @@
     "props": {
       "rotation": [
         {
-          "frame": 0,
-          "value": 90
-        },
-        {
           "frame": 0.3333333333333333,
-          "value": 777
+          "value": 0
         }
       ],
       "position": [
         {
           "frame": 0,
           "value": [
-            167,
-            325
-          ]
+            386,
+            232
+          ],
+          "motionPath": []
         },
         {
           "frame": 0.3333333333333333,
           "value": [
-            824,
-            314
-          ]
+            673,
+            389
+          ],
+          "motionPath": []
         }
       ]
     }

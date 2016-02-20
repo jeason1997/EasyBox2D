@@ -26,14 +26,13 @@ packages
   |--Box2D  （Box2D插件脚本）
 ```
 
-### 图像相关 Graphics
+### 详细说明 Box2D
 
-- [01_sprite](assets/cases/01_graphics/01_sprite)
-  - [Simple Sprite](assets/cases/01_graphics/01_sprite/simple_sprite.md)
-  - [Atlas Sprite](assets/cases/01_graphics/01_sprite/atlas_sprite.md)
-  - [Sliced Sprite](assets/cases/01_graphics/01_sprite/sliced_sprite.md)
-- [02_particle](assets/cases/01_graphics/02_particle)
-  - [Simple Particle](assets/cases/01_graphics/02_particle/simple_particle.md)
+- [Body](assets/cases/01_graphics/01_sprite)
+- [Shape](assets/cases/01_graphics/02_particle)
+  - [BoxShape](assets/cases/01_graphics/02_particle/simple_particle.md)
+- [Joint](assets/cases/01_graphics/02_particle)
+  - [MouseJoint](assets/cases/01_graphics/02_particle/simple_particle.md)
 
 
 

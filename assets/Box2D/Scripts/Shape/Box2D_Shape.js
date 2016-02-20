@@ -58,11 +58,11 @@ Box2D_Shape = cc.Class({
         },
     },
 
-    onLoad: function () {
-        if (CC_EDITOR)
-            Debug.error(Editor.T('Box2D.Shape.addshape_error'));
-        this.destroy();
-    },
+    //onLoad: function () {
+    //    if (CC_EDITOR)
+    //        Logger.error(Editor.T('Box2D.Shape.addshape_error'));
+    //    this.destroy();
+    //},
     
     getShapeData: function () {
         

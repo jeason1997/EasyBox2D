@@ -71,7 +71,7 @@ MouseJoint = cc.Class({
         md.collideConnected = this.enableCollision;
         md.maxForce = this.dragForce * this.localBody.GetMass();
         this.joint = Box2D_Engine.instance.world.CreateJoint(md);
-        this.localBody.SetAwake(true);
+        //this.localBody.SetAwake(true);
     },
 
     onDestroy: function () {

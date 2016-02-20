@@ -91,8 +91,8 @@
     "_children": [],
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
+    "_scaleX": 0.21,
+    "_scaleY": 0.21,
     "_position": {
       "__type__": "cc.Vec2",
       "x": 480,
@@ -163,8 +163,8 @@
   {
     "__type__": "PhysicsDebugger",
     "openDebug": true,
-    "lineThickness": 1,
-    "drawShape": false,
+    "lineThickness": 2,
+    "drawShape": true,
     "drawJoint": true,
     "drawAABB": false,
     "drawRay": true,
@@ -365,7 +365,7 @@
     "node": {
       "__id__": 9
     },
-    "_enabled": true,
+    "_enabled": false,
     "_spriteFrame": {
       "__uuid__": "bc91ea2b-e596-4ff5-a206-86a911f922bf"
     },
@@ -408,11 +408,12 @@
     "shapeType": 0,
     "ShapeData": null,
     "body": null,
+    "_canvas": null,
     "_N$sameAsNode": true,
     "_N$box": {
       "__type__": "cc.Vec2",
-      "x": 32,
-      "y": 32
+      "x": 972.4000000000001,
+      "y": 43.71
     },
     "_N$offset": {
       "__type__": "cc.Vec2",
@@ -449,7 +450,7 @@
     "_children": [],
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 2.2,
+    "_scaleX": 2.22,
     "_scaleY": 0.31,
     "_position": {
       "__type__": "cc.Vec2",
@@ -485,7 +486,7 @@
     "node": {
       "__id__": 13
     },
-    "_enabled": true,
+    "_enabled": false,
     "_spriteFrame": {
       "__uuid__": "bc91ea2b-e596-4ff5-a206-86a911f922bf"
     },
@@ -528,11 +529,12 @@
     "shapeType": 0,
     "ShapeData": null,
     "body": null,
+    "_canvas": null,
     "_N$sameAsNode": true,
     "_N$box": {
       "__type__": "cc.Vec2",
-      "x": 32,
-      "y": 32
+      "x": 981.2400000000001,
+      "y": 43.71
     },
     "_N$offset": {
       "__type__": "cc.Vec2",
@@ -605,7 +607,7 @@
     "node": {
       "__id__": 17
     },
-    "_enabled": true,
+    "_enabled": false,
     "_spriteFrame": {
       "__uuid__": "bc91ea2b-e596-4ff5-a206-86a911f922bf"
     },
@@ -648,11 +650,12 @@
     "shapeType": 0,
     "ShapeData": null,
     "body": null,
+    "_canvas": null,
     "_N$sameAsNode": true,
     "_N$box": {
       "__type__": "cc.Vec2",
-      "x": 32,
-      "y": 32
+      "x": 623.2199999999999,
+      "y": 43.71
     },
     "_N$offset": {
       "__type__": "cc.Vec2",
@@ -725,7 +728,7 @@
     "node": {
       "__id__": 21
     },
-    "_enabled": true,
+    "_enabled": false,
     "_spriteFrame": {
       "__uuid__": "bc91ea2b-e596-4ff5-a206-86a911f922bf"
     },
@@ -768,11 +771,12 @@
     "shapeType": 0,
     "ShapeData": null,
     "body": null,
+    "_canvas": null,
     "_N$sameAsNode": true,
     "_N$box": {
       "__type__": "cc.Vec2",
-      "x": 32,
-      "y": 32
+      "x": 623.2199999999999,
+      "y": 43.71
     },
     "_N$offset": {
       "__type__": "cc.Vec2",
@@ -1636,18 +1640,18 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 94,
-      "height": 94
+      "width": 172,
+      "height": 168
     },
     "_children": [],
-    "_rotationX": 0,
-    "_rotationY": 0,
+    "_rotationX": -49,
+    "_rotationY": -49,
     "_scaleX": 1,
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 317,
-      "y": 420
+      "x": 299,
+      "y": 340
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1681,12 +1685,12 @@
     "node": {
       "__id__": 57
     },
-    "_enabled": true,
+    "_enabled": false,
     "_spriteFrame": {
       "__uuid__": "d1f6a5ae-d144-406c-b454-4c01e63e7974"
     },
     "_type": 0,
-    "_useOriginalSize": true,
+    "_useOriginalSize": false,
     "_atlas": null
   },
   {
@@ -1721,11 +1725,12 @@
       "__id__": 57
     },
     "_enabled": true,
-    "shapeType": 0,
+    "shapeType": 1,
     "ShapeData": null,
     "body": null,
+    "_canvas": null,
     "_N$sameAsNode": true,
-    "_N$diameter": 32,
+    "_N$diameter": 64.52000000000001,
     "_N$offset": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -1779,8 +1784,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 472,
-      "y": 319
+      "x": 496,
+      "y": 352
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1814,7 +1819,7 @@
     "node": {
       "__id__": 62
     },
-    "_enabled": true,
+    "_enabled": false,
     "_spriteFrame": {
       "__uuid__": "d1f6a5ae-d144-406c-b454-4c01e63e7974"
     },
@@ -1854,11 +1859,12 @@
       "__id__": 62
     },
     "_enabled": true,
-    "shapeType": 0,
+    "shapeType": 1,
     "ShapeData": null,
     "body": null,
+    "_canvas": null,
     "_N$sameAsNode": true,
-    "_N$diameter": 32,
+    "_N$diameter": 94,
     "_N$offset": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -1923,18 +1929,18 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 68,
-      "height": 75
+      "width": 94,
+      "height": 94
     },
     "_children": [],
-    "_rotationX": 0,
-    "_rotationY": 0,
+    "_rotationX": 146,
+    "_rotationY": 146,
     "_scaleX": 1,
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 715,
-      "y": 471
+      "x": 784,
+      "y": 392
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1968,12 +1974,12 @@
     "node": {
       "__id__": 67
     },
-    "_enabled": true,
+    "_enabled": false,
     "_spriteFrame": {
       "__uuid__": "993767db-2752-4b8b-9cc1-16fd133db4e9"
     },
     "_type": 0,
-    "_useOriginalSize": true,
+    "_useOriginalSize": false,
     "_atlas": null
   },
   {
@@ -2025,15 +2031,16 @@
     "shapeType": 0,
     "ShapeData": null,
     "body": null,
+    "_canvas": null,
     "_N$sameAsNode": true,
     "_N$box": {
       "__type__": "cc.Vec2",
-      "x": 32,
-      "y": 32
+      "x": 94,
+      "y": 94
     },
     "_N$offset": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": 100,
       "y": 0
     }
   }
