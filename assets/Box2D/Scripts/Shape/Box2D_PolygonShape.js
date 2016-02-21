@@ -22,7 +22,7 @@ Box2D_PolygonShape = cc.Class({
             default: ShapeType.POLYGON,
             type: ShapeType,
             readonly: true,
-            override: true,
+            visible: false,
         },
         removePathInGame: {
             default: false,  

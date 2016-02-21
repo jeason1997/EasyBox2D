@@ -22,7 +22,7 @@ Box2D_CircleShape = cc.Class({
             default: ShapeType.CIRCLE,
             type: ShapeType,
             readonly: true,
-            override: true,
+            visible: false,
         },
         sameAsNode: {
             default: true,

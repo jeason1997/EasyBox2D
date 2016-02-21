@@ -22,7 +22,7 @@ Box2D_BoxShape = cc.Class({
             default: ShapeType.BOX,
             type: ShapeType,
             readonly: true,
-            override: true,
+            visible: false,
         },
         sameAsNode: {
             default: true,

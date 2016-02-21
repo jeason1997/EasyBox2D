@@ -43,10 +43,6 @@ Box2D_Shape = cc.Class({
     },
 
     properties: {
-        shapeType: {
-            default: null,
-            displayName: 'i18n:Box2D.Shape.shapeType',
-        },
         ShapeData: {
             default: null,
             visible: false,

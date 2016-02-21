@@ -22,7 +22,7 @@ Box2D_EdgeShape = cc.Class({
             default: ShapeType.EDGE,
             type: ShapeType,
             readonly: true,
-            override: true,
+            visible: false,
         },
         close: {
             default: false,

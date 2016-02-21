@@ -6,6 +6,10 @@ cc.Class({
     },
     
     properties: {
+        test: {
+            default: 5,
+            readonly: true,
+        },
         p1: new cc.Vec2(0, 0),
         p2: new cc.Vec2(100, 100),
     },
@@ -13,6 +17,9 @@ cc.Class({
     onLoad: function () {
         this.draw = new cc.DrawNode();
         cc.Canvas.instance.node.parent._sgNode.addChild(this.draw);
+        Logger.log(this.test);
+        this.test = 6;
+        Logger.log(this.test);
     },
     
     update: function(dt) {
