@@ -9,23 +9,11 @@
 require('Physics');
 require('Contact');
 
-WorldData = function (gravity, allowSleep,
-    timeStep, velocityIterations, positionIterations,
-    bodyList, jointList) {
-    this.gravity = gravity;
-    this.allowSleep = allowSleep;
-    this.timeStep = timeStep;
-    this.velocityIterations = velocityIterations;
-    this.positionIterations = positionIterations;
-    this.bodyList = bodyList;
-    this.jointList = jointList;
-};
-
 PhysicsDebugger = cc.Class({
+    
     name: 'PhysicsDebugger',
     
     ctor: function () {
-        
     },
     
     properties: {
@@ -38,30 +26,28 @@ PhysicsDebugger = cc.Class({
         drawPair: false,
         drawCenterOfMass: false,
         drawController: false,
-    },
-    
-    createDebugDraw: function () {
-        var sprite = new cc.DrawNode();
-        cc.Canvas.instance.node.parent._sgNode.addChild(sprite);
-        var debugDraw = new b2DebugDraw();
-        debugDraw.SetDrawScale(PTM_RATIO);
-        debugDraw.SetSprite(sprite);
-		debugDraw.SetFillAlpha(0.3);
-		debugDraw.SetLineThickness(this.lineThickness);
-        debugDraw.SetFlags(
-            (this.drawShape ? b2DebugDraw.e_shapeBit : 0) |
-            (this.drawJoint ? b2DebugDraw.e_jointBit : 0) |
-            (this.drawAABB ? b2DebugDraw.e_aabbBit : 0) |
-            (this.drawPair ? b2DebugDraw.e_pairBit : 0) |
-            (this.drawCenterOfMass ? b2DebugDraw.e_centerOfMassBit : 0) |
-            (this.drawController ? b2DebugDraw.e_controllerBit : 0));
-        this.debugDraw = debugDraw;
+        _debugDraw: null,
     },
     
     getDebugDraw: function () {
-        if (!this.debugDraw)
-            this.createDebugDraw();
-        return this.debugDraw;
+        if (!this._debugDraw) {
+            var sprite = new cc.DrawNode();
+            cc.Canvas.instance.node.parent._sgNode.addChild(sprite);
+            var debugDraw = new b2DebugDraw();
+            debugDraw.SetDrawScale(PTM_RATIO);
+            debugDraw.SetSprite(sprite);
+		    debugDraw.SetFillAlpha(0.3);
+		    debugDraw.SetLineThickness(this.lineThickness);
+            debugDraw.SetFlags(
+                (this.drawShape ? b2DebugDraw.e_shapeBit : 0) |
+                (this.drawJoint ? b2DebugDraw.e_jointBit : 0) |
+                (this.drawAABB ? b2DebugDraw.e_aabbBit : 0) |
+                (this.drawPair ? b2DebugDraw.e_pairBit : 0) |
+                (this.drawCenterOfMass ? b2DebugDraw.e_centerOfMassBit : 0) |
+                (this.drawController ? b2DebugDraw.e_controllerBit : 0));
+            this._debugDraw = debugDraw;
+        }
+        return this._debugDraw;
     },
     
     clone: function () {
@@ -81,9 +67,6 @@ Box2D_Engine = cc.Class({
 
     statics: {
         _instance: null,
-        worldData: null,
-        bodyList: [],
-        jointList: [],
     },
 
     properties: {
@@ -93,9 +76,7 @@ Box2D_Engine = cc.Class({
             tooltip: 'i18n:Box2D.Engine.playInEditor_tooltip',
             notify: function () {
                 if (CC_EDITOR) {
-                    this.pushDataToEditor();
                     Editor.Panel.open('Box2D.panel');
-                    Editor.sendToPanel('Box2D.panel', 'physics:run', Box2D_Engine.worldData);
                 }
             },
         },
@@ -151,10 +132,7 @@ Box2D_Engine = cc.Class({
 
     onLoad: function () {
         // Show FPS
-        {
-            cc.director.setDisplayStats(true);
-            cc.SPRITE_DEBUG_DRAW = 2;
-        }
+        cc.director.setDisplayStats(true);
 
         if (Box2D_Engine._instance) {
             Logger.error('The scene should only have one active Engine at the same time.');
@@ -192,31 +170,6 @@ Box2D_Engine = cc.Class({
                 this.world.DrawDebugData();
             this.world.ClearForces();
         }
-    },
-
-    pushDataToEditor: function () {
-        var bodys = new Array(Box2D_Engine.bodyList.length);
-        var joints = new Array(Box2D_Engine.jointList.length);
-        for (i = 0; i < Box2D_Engine.bodyList.length; ++i) {
-            var data = Box2D_Engine.bodyList[i].getBodyData();
-            // 修复
-            data.bodyDef.angle = -data.bodyDef.angle;
-            var pos = data.bodyDef.position;
-            data.bodyDef.position = new b2Vec2(
-                pos.x, cc.Canvas.instance.designResolution.height / PTM_RATIO - pos.y);
-            bodys.push(data);
-        }
-        for (i = 0; i < Box2D_Engine.jointList.length; ++i) {
-            joints.push(Box2D_Engine.jointList[i].getJointData());
-        }
-
-        Box2D_Engine.worldData = new WorldData(
-            new b2Vec2(this.gravity.x, -this.gravity.y),
-            this.allowSleep,
-            this.timeStep,
-            this.velocityIterations,
-            this.positionIterations,
-            bodys, joints);
     },
 
     doContact: function (contactType, contact, arg) {

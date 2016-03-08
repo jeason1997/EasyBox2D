@@ -152,7 +152,7 @@
       "__id__": 5
     },
     "world": null,
-    "_N$playInEditor": false,
+    "_N$playInEditor": true,
     "_N$gravity": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -163,14 +163,15 @@
   {
     "__type__": "PhysicsDebugger",
     "openDebug": true,
-    "lineThickness": 2,
+    "lineThickness": 3,
     "drawShape": true,
-    "drawJoint": true,
+    "drawJoint": false,
     "drawAABB": false,
     "drawRay": true,
-    "drawPair": true,
-    "drawCenterOfMass": true,
-    "drawController": true
+    "drawPair": false,
+    "drawCenterOfMass": false,
+    "drawController": false,
+    "_debugDraw": null
   },
   {
     "__type__": "cd948rIoV9BGrkcWncTKNzr",
@@ -190,7 +191,8 @@
       "__type__": "cc.Vec2",
       "x": 400,
       "y": 200
-    }
+    },
+    "prefabs": []
   },
   {
     "__type__": "cc.Node",
@@ -442,7 +444,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -583,7 +586,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -724,7 +728,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -865,7 +870,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -1006,7 +1012,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -1147,7 +1154,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -1288,7 +1296,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -1429,7 +1438,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -1570,7 +1580,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -1711,7 +1722,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -1852,7 +1864,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -1993,7 +2006,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -2134,7 +2148,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -2275,7 +2290,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -2416,7 +2432,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -2557,7 +2574,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -2698,7 +2716,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -2839,7 +2858,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -2980,7 +3000,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "cc.Node",
@@ -3124,7 +3145,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "0e757JUOm5JoZIX2YxQI5QH",
@@ -3157,7 +3179,8 @@
     "enableMotor": false,
     "motorSpeed": 0,
     "maxMotorTorque": 0,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "0c99fYkUqJLZLcJBdngYcq5",
@@ -5728,8 +5751,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 476,
-      "y": 442
+      "x": 167,
+      "y": 342
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -5908,7 +5931,8 @@
     "enableMotor": true,
     "motorSpeed": -100,
     "maxMotorTorque": 100,
-    "breakTorque": -1
+    "breakTorque": -1,
+    "_canvas": null
   },
   {
     "__type__": "159bd91KdxFxYy0M1tdLytY",
@@ -6016,8 +6040,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 476,
-      "y": 543
+      "x": 162,
+      "y": 487
     },
     "_skewX": 0,
     "_skewY": 0,

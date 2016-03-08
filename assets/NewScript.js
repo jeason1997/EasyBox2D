@@ -1,3 +1,13 @@
+var ClickEvent = cc.Class({
+    name: 'ClickEvent',
+    properties: {
+        prefabs: {
+            default: [],
+            type: [cc.Prefab],
+        }
+    },
+});
+
 cc.Class({
     extends: cc.Component,
 
@@ -12,6 +22,10 @@ cc.Class({
         },
         p1: new cc.Vec2(0, 0),
         p2: new cc.Vec2(100, 100),
+        prefabs: {
+            default: [],
+            type: [ClickEvent],
+        }
     },
     
     onLoad: function () {

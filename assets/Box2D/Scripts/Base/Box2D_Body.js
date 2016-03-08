@@ -38,10 +38,6 @@ Box2D_Body = cc.Class({
         disallowMultiple: true,
     },
 
-    ctor: function() {
-        Box2D_Engine.bodyList.push(this);
-    },
-
     properties: {
         tag: '',
         bodyType: {

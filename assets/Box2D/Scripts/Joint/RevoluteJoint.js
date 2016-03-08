@@ -12,7 +12,7 @@ RevoluteJoint = cc.Class({
             default: false,
         },
         lowerAngle: {
-            default: 0,  
+            default: 0,
         },
         upperAngle: {
             default: 0,
@@ -32,8 +32,8 @@ RevoluteJoint = cc.Class({
         breakTorque: {
             default: -1,
         },
+        _canvas: null,
     },
-
 
     start: function () {
         this.initJoint();
