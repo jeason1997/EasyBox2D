@@ -1,8 +1,8 @@
 // Editor Mode
-CC_EDITOR = (cc.engine !== undefined);
+window.CC_EDITOR = (cc.engine !== undefined);
 
 // 物理世界里的一米对应屏幕上的像素
-PTM_RATIO = 32;
+window.PTM_RATIO = 32;
 
 // Box2D Defined
 var Box2D = require('box2dweb-commonjs');
