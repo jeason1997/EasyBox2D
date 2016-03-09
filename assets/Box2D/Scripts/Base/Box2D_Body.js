@@ -7,28 +7,27 @@
  *************************************************/
 
 require('Physics');
-require('CallbackEvent');
 
-BodyType = cc.Enum({
+var BodyType = cc.Enum({
     STATIC: 0,
     KINEMATIC: 1,
     DYNAMIC: 2
 });
 
-BodyData = function(fixtureDef, bodyDef, shapeData) {
+var BodyData = function(fixtureDef, bodyDef, shapeData) {
     this.fixtureDef = fixtureDef;
     this.bodyDef = bodyDef;
     this.shapeData = shapeData;
 };
 
-ContactType = cc.Enum({
+var ContactType = cc.Enum({
     BEGIN_CONTACT: 0,
     PRE_CONTACT: 1,
     POST_CONTACT: 2,
     END_CONTACT: 3,
 });
 
-Box2D_Body = cc.Class({
+window.Box2D_Body = cc.Class({
 
     extends: cc.Component,
 
@@ -90,8 +89,8 @@ Box2D_Body = cc.Class({
             notify: function() {},
         },
         Category: {
-            default: Category.TYPE_1,
-            type: Category,
+            default: Physics.Category.TYPE_1,
+            type: Physics.Category,
         },
         CollisionWith: {
             default: [],
@@ -149,7 +148,7 @@ Box2D_Body = cc.Class({
     createBody: function() {
         var data = this.getBodyData();
         this.body = Box2D_Engine.instance.world.CreateBody(data.bodyDef);
-        for (i = 0; i < data.fixtureDef.length; ++i) {
+        for (var i = 0; i < data.fixtureDef.length; ++i) {
             this.body.CreateFixture(data.fixtureDef[i]);
         }
         this.body.SetUserData(this);
@@ -165,7 +164,7 @@ Box2D_Body = cc.Class({
             shape.body = this;
             if (shape.shapeType === ShapeType.EDGE) {
                 var shapes = shape.getShape();
-                for (i = 0; i < shapes.length; ++i) {
+                for (var i = 0; i < shapes.length; ++i) {
                     var fixDef = new b2FixtureDef();
                     fixDef.density = this.density;
                     fixDef.friction = this.friction;
@@ -173,7 +172,7 @@ Box2D_Body = cc.Class({
                     fixDef.isSensor = this.isSensor;
 
                     var maskBits = 0;
-                    for (j = 1; j < this.CollisionWith.length && j <= 16; ++j) {
+                    for (var j = 1; j < this.CollisionWith.length && j <= 16; ++j) {
                         if (this.CollisionWith[j])
                             maskBits += Math.pow(2, j - 1);
                     }
@@ -194,7 +193,7 @@ Box2D_Body = cc.Class({
                 fixDef.isSensor = this.isSensor;
 
                 var maskBits = 0;
-                for (i = 1; i < this.CollisionWith.length && i <= 16; ++i) {
+                for (var i = 1; i < this.CollisionWith.length && i <= 16; ++i) {
                     if (this.CollisionWith[i])
                         maskBits += Math.pow(2, i - 1);
                 }

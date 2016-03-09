@@ -1,4 +1,4 @@
-CallbackEvent = cc.Class({
+window.CallbackEvent = cc.Class({
     name: 'CallbackEvent',
     properties: {
         target: {

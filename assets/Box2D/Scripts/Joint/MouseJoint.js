@@ -1,6 +1,6 @@
 require('Box2D_Body');
 
-MouseJoint = cc.Class({
+window.MouseJoint = cc.Class({
 
     extends: cc.Component,
 

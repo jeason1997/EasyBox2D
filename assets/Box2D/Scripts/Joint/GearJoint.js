@@ -6,7 +6,7 @@ var GearJointType = cc.Enum({
     PRISMATIC: 1,
 });
 
-GearJoint = cc.Class({
+window.GearJoint = cc.Class({
 
     extends: cc.Component,
 

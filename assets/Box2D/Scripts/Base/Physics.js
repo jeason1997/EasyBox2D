@@ -1,40 +1,45 @@
 // Editor Mode
 window.CC_EDITOR = (cc.engine !== undefined);
 
-// 物理世界里的一米对应屏幕上的像素
+// PTM_RATIO Defined
 window.PTM_RATIO = 32;
+
+// Physics Defined
+window.Physics = {
+    
+};
 
 // Box2D Defined
 var Box2D = require('box2dweb-commonjs');
-b2AABB = Box2D.b2AABB;
-b2World = Box2D.b2World;
-b2AABB = Box2D.b2AABB;
-b2Body = Box2D.b2Body;
-b2BodyDef = Box2D.b2BodyDef;
-b2CircleShape = Box2D.b2CircleShape;
-b2Fixture = Box2D.b2Fixture;
-b2FixtureDef = Box2D.b2FixtureDef;
-b2Vec2 = Box2D.b2Vec2;
-b2DebugDraw = Box2D.b2DebugDraw;
-b2MassData = Box2D.b2MassData;
-b2PolygonShape = Box2D.b2PolygonShape;
-b2PrismaticJointDef = Box2D.b2PrismaticJointDef;
-b2RevoluteJointDef = Box2D.b2RevoluteJointDef;
-b2DistanceJointDef = Box2D.b2DistanceJointDef;
-b2Transform = Box2D.b2Transform;
-b2ContactListener = Box2D.b2ContactListener;
-b2MouseJointDef = Box2D.b2MouseJointDef;
-b2FilterData = Box2D.b2FilterData;
-b2EdgeShape = Box2D.b2EdgeShape;
-b2LineJointDef = Box2D.b2LineJointDef;
-b2WeldJointDef = Box2D.b2WeldJointDef;
-b2GearJointDef = Box2D.b2GearJointDef;
-b2PrismaticJointDef = Box2D.b2PrismaticJointDef;
-b2FrictionJointDef = Box2D.b2FrictionJointDef;
-b2PulleyJointDef = Box2D.b2PulleyJointDef;
+window.b2AABB = Box2D.b2AABB;
+window.b2World = Box2D.b2World;
+window.b2AABB = Box2D.b2AABB;
+window.b2Body = Box2D.b2Body;
+window.b2BodyDef = Box2D.b2BodyDef;
+window.b2CircleShape = Box2D.b2CircleShape;
+window.b2Fixture = Box2D.b2Fixture;
+window.b2FixtureDef = Box2D.b2FixtureDef;
+window.b2Vec2 = Box2D.b2Vec2;
+window.b2DebugDraw = Box2D.b2DebugDraw;
+window.b2MassData = Box2D.b2MassData;
+window.b2PolygonShape = Box2D.b2PolygonShape;
+window.b2PrismaticJointDef = Box2D.b2PrismaticJointDef;
+window.b2RevoluteJointDef = Box2D.b2RevoluteJointDef;
+window.b2DistanceJointDef = Box2D.b2DistanceJointDef;
+window.b2Transform = Box2D.b2Transform;
+window.b2ContactListener = Box2D.b2ContactListener;
+window.b2MouseJointDef = Box2D.b2MouseJointDef;
+window.b2FilterData = Box2D.b2FilterData;
+window.b2EdgeShape = Box2D.b2EdgeShape;
+window.b2LineJointDef = Box2D.b2LineJointDef;
+window.b2WeldJointDef = Box2D.b2WeldJointDef;
+window.b2GearJointDef = Box2D.b2GearJointDef;
+window.b2PrismaticJointDef = Box2D.b2PrismaticJointDef;
+window.b2FrictionJointDef = Box2D.b2FrictionJointDef;
+window.b2PulleyJointDef = Box2D.b2PulleyJointDef;
 
 // Category
-Category = cc.Enum({
+window.Physics.Category = cc.Enum({
     TYPE_1: 1,
     TYPE_2: 2,
     TYPE_3: 4,
@@ -56,8 +61,8 @@ Category = cc.Enum({
     TYPE_16: 32768,
 });
 
-Ray = cc.Class({
-    
+// Ray Defined
+window.Physics.Ray = cc.Class({
     // constructor1: start, end
     // constructor2: start, direction, distant
     ctor: function () {
@@ -87,15 +92,14 @@ Ray = cc.Class({
     },
 });
 
-window.Physics = {
-    rayCast: function(point1, point2, callback) {
-        var p1 = new b2Vec2(point1.x / PTM_RATIO, point1.y / PTM_RATIO);
-        var p2 = new b2Vec2(point2.x / PTM_RATIO, point2.y / PTM_RATIO);
-        Box2D_Engine.instance.world.RayCast(callback, p1, p2);
+// Ray Function
+window.Physics.RayCast = function(point1, point2, callback) {
+    var p1 = new b2Vec2(point1.x / PTM_RATIO, point1.y / PTM_RATIO);
+    var p2 = new b2Vec2(point2.x / PTM_RATIO, point2.y / PTM_RATIO);
+    Box2D_Engine.instance.world.RayCast(callback, p1, p2);
         
-        // Debugdraw
-        if (Box2D_Engine.instance.physicsDebugger.openDebug && Box2D_Engine.instance.physicsDebugger.drawRay) {
-            Box2D_Engine.instance.physicsDebugger.getDebugDraw().GetSprite().drawSegment(point1, point2);
-        }
-    },
+    // Debugdraw
+    if (Box2D_Engine.instance.physicsDebugger.openDebug && Box2D_Engine.instance.physicsDebugger.drawRay) {
+        Box2D_Engine.instance.physicsDebugger.getDebugDraw().GetSprite().drawSegment(point1, point2);
+    }
 };

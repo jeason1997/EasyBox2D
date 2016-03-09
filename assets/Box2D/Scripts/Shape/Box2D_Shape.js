@@ -9,7 +9,7 @@
 require('Physics');
 require('Box2D_Body');
 
-ShapeType = cc.Enum({
+window.ShapeType = cc.Enum({
     BOX: 0,
     CIRCLE: 1,
     POLYGON: 2,
@@ -20,7 +20,7 @@ ShapeType = cc.Enum({
  * @class ShapeData
  * @describe
  */
-ShapeData = function(shapeType, offset, radius, box, vertexes){
+window.ShapeData = function(shapeType, offset, radius, box, vertexes){
     this.shapeType = shapeType;
     this.offset = offset;
     this.radius = radius;
@@ -32,7 +32,7 @@ ShapeData = function(shapeType, offset, radius, box, vertexes){
  * @class Box2D_Shape
  * @extends cc.Component
  */
-Box2D_Shape = cc.Class({
+window.Box2D_Shape = cc.Class({
     
     extends: cc.Component,
     

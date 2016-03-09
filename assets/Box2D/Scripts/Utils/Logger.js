@@ -1,5 +1,5 @@
 // Debug
-Logger = cc.Class();
+window.Logger = cc.Class();
 
 Logger.assert = function (arg) {
     if (!arg) {

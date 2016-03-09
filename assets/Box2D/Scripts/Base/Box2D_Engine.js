@@ -6,10 +6,9 @@
  * Describe : 
  *************************************************/
 
-require('Physics');
 require('Contact');
 
-PhysicsDebugger = cc.Class({
+var PhysicsDebugger = cc.Class({
     
     name: 'PhysicsDebugger',
     
@@ -55,13 +54,12 @@ PhysicsDebugger = cc.Class({
     },
 });
 
-Box2D_Engine = cc.Class({
+window.Box2D_Engine = cc.Class({
 
     extends: cc.Component,
     
     editor: {
         menu: 'i18n:Box2D.Engine.menu',
-        executeInEditMode: false,
         disallowMultiple: true,
     },
 
@@ -131,8 +129,6 @@ Box2D_Engine = cc.Class({
     },
 
     onLoad: function () {
-        // Show FPS
-        cc.director.setDisplayStats(true);
 
         if (Box2D_Engine._instance) {
             Logger.error('The scene should only have one active Engine at the same time.');
@@ -200,12 +196,12 @@ Box2D_Engine = cc.Class({
                 break;
         }
         
-        // A
+        // Body A
         for (i = 0; i < eventA.length; ++i) {
             eventA[i](c);
         }
         
-        // B
+        // Body B
         for (i = 0; i < eventB.length; ++i) {
             eventB[i](c);
         }

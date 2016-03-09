@@ -1,6 +1,6 @@
 require('Joint');
 
-RevoluteJoint = cc.Class({
+window.RevoluteJoint = cc.Class({
 
     extends: Joint,
 

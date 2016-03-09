@@ -1,6 +1,6 @@
 require('Box2D_Body');
 
-Contact = cc.Class({
+window.Contact = cc.Class({
     name: 'Contact',
     
     ctor: function () {

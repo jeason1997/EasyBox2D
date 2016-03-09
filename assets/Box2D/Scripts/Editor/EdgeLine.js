@@ -1,4 +1,4 @@
-EdgeLine = cc.Class({
+window.EdgeLine = cc.Class({
     extends: cc.Component,
     
     editor: {

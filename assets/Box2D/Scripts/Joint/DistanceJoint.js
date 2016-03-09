@@ -8,7 +8,7 @@
 
 require('Joint');
 
-DistanceJoint = cc.Class({
+window.DistanceJoint = cc.Class({
 
     extends: Joint,
 

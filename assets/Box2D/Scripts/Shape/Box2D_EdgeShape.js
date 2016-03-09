@@ -8,7 +8,7 @@
 
 require('Box2D_Shape');
 
-Box2D_EdgeShape = cc.Class({
+window.Box2D_EdgeShape = cc.Class({
     
     extends: Box2D_Shape,
     

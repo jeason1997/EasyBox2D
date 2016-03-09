@@ -1,6 +1,6 @@
 require('Joint');
 
-PrismaticJoint = cc.Class({
+window.PrismaticJoint = cc.Class({
     extends: Joint,
 
     properties: {

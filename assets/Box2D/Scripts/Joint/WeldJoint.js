@@ -1,6 +1,6 @@
 require('Joint');
 
-WeldJoint = cc.Class({
+window.WeldJoint = cc.Class({
 
     extends: Joint,
 

@@ -8,7 +8,7 @@
 
 require('Box2D_Body');
 
-Joint = cc.Class({
+window.Joint = cc.Class({
 
     extends: cc.Component,
 

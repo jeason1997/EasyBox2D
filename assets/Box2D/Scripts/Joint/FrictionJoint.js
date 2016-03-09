@@ -1,6 +1,6 @@
 require('Joint');
 
-FrictionJoint = cc.Class({
+window.FrictionJoint = cc.Class({
 
     extends: Joint,
 

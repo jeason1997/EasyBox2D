@@ -1,6 +1,6 @@
 require('Joint');
 
-LineJoint = cc.Class({
+window.LineJoint = cc.Class({
 
     extends: Joint,
 

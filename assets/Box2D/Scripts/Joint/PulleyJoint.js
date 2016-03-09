@@ -1,6 +1,6 @@
 require('Joint');
 
-PulleyJoint = cc.Class({
+window.PulleyJoint = cc.Class({
 
     extends: Joint,
 
