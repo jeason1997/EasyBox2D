@@ -16,10 +16,6 @@ cc.Class({
     },
     
     properties: {
-        test: {
-            default: 5,
-            readonly: true,
-        },
         p1: new cc.Vec2(0, 0),
         p2: new cc.Vec2(100, 100),
         prefabs: {
@@ -31,13 +27,10 @@ cc.Class({
     onLoad: function () {
         this.draw = new cc.DrawNode();
         cc.Canvas.instance.node.parent._sgNode.addChild(this.draw);
-        Logger.log(this.test);
-        this.test = 6;
-        Logger.log(this.test);
     },
     
     update: function(dt) {
-        Physics.rayCast(this.p1, this.p2, this.back.bind(this));
+        Physics.RayCast(this.p1, this.p2, this.back.bind(this));
     },
     
     back: function(fixture, point, normal, fraction) {

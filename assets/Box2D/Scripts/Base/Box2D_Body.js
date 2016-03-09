@@ -20,7 +20,7 @@ var BodyData = function(fixtureDef, bodyDef, shapeData) {
     this.shapeData = shapeData;
 };
 
-var ContactType = cc.Enum({
+window.ContactType = cc.Enum({
     BEGIN_CONTACT: 0,
     PRE_CONTACT: 1,
     POST_CONTACT: 2,

@@ -197,7 +197,7 @@ window.Box2D_Engine = cc.Class({
         }
         
         // Body A
-        for (i = 0; i < eventA.length; ++i) {
+        for (var i = 0; i < eventA.length; ++i) {
             eventA[i](c);
         }
         
