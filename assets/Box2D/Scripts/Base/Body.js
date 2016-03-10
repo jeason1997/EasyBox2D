@@ -118,8 +118,8 @@ window.Body = cc.Class({
 
         this.node.on('position-changed', function(event) {
             if (!this.setPropertiesByEngien) {
-                this.body.SetPosition(new b2Vec2(this.node.convertToWorldSpaceAR().x / PTM_RATIO,
-                    this.node.convertToWorldSpaceAR().y / PTM_RATIO));
+                this.body.SetPosition(new b2Vec2(this.node.convertToWorldSpaceAR(cc.Vec2.ZERO).x / PTM_RATIO,
+                    this.node.convertToWorldSpaceAR(cc.Vec2.ZERO).y / PTM_RATIO));
             }
         }, this);
 
@@ -205,8 +205,8 @@ window.Body = cc.Class({
         }
 
         // 将节点的本地坐标换算成节点的世界坐标
-        bodyDef.position = new b2Vec2(this.node.convertToWorldSpaceAR().x / PTM_RATIO,
-            this.node.convertToWorldSpaceAR().y / PTM_RATIO);
+        bodyDef.position = new b2Vec2(this.node.convertToWorldSpaceAR(cc.Vec2.ZERO).x / PTM_RATIO,
+            this.node.convertToWorldSpaceAR(cc.Vec2.ZERO).y / PTM_RATIO);
         bodyDef.angle = -(3.14 / 180) * this.node.convertToWorldRotation();
         
         // 创建刚体

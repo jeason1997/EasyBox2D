@@ -32,5 +32,14 @@
  * 17.添加贝塞尔多边形编辑
  * 18.edge不支持缩放
  * 19.修复将Node放到canvas里，导致debugdraw比例不对的问题
- * 20.convertToWorldSpaceAR(cc.v2());在原生下jsb会出错，待官方修复
+ 
+ * 20.模拟器原生jsb有个BUG：
+ 一个节点上挂两个组件，一个sprite一个destory,里面就一句destory代码：
+ 在web下一切正常，在模拟器下，会出现以下BUG：
+    1.如果这个node的组件顺序为sprite在上，destroy在下，那么正常，运行游戏后Node消失
+
+    2.如果顺序反过来，即destroy在上，那么会出现的后果就是，运行后该node并没被destroy
+
+    待官方修复
+
  */
