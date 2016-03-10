@@ -71,7 +71,7 @@ window.GearJoint = cc.Class({
         jointDef.ratio = this.ratio;
         jointDef.collideConnected = this.enableCollision;
 
-        this.joint = Box2D_Engine.instance.world.CreateJoint(jointDef);
+        this.joint = Engine.instance.world.CreateJoint(jointDef);
     },
 });
 

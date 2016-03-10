@@ -59,6 +59,6 @@ window.RevoluteJoint = cc.Class({
         jointDef.maxMotorTorque = this.maxMotorTorque;
         jointDef.motorSpeed = this.motorSpeed;
         
-        this.joint = Box2D_Engine.instance.world.CreateJoint(jointDef);
+        this.joint = Engine.instance.world.CreateJoint(jointDef);
     },
 });

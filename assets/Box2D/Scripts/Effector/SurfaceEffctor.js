@@ -4,7 +4,7 @@ cc.Class({
     extends: cc.Component,
     
     editor: {
-        requireComponent: Box2D_Body,
+        requireComponent: Body,
     },
 
     properties: {
@@ -12,7 +12,7 @@ cc.Class({
     },
 
     onLoad: function () {
-        body = this.getComponent('Box2D_Body');
+        body = this.getComponent('Body');
         var callback = new CallbackEvent();
         callback.target = this;
         callback.componentName = this.__classname__;

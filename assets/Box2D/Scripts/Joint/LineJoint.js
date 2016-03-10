@@ -53,7 +53,7 @@ window.LineJoint = cc.Class({
         jointDef.maxMotorForce = this.maxMotorForce;
         jointDef.motorSpeed = this.motorSpeed;
         
-        this.joint = Box2D_Engine.instance.world.CreateJoint(jointDef);
+        this.joint = Engine.instance.world.CreateJoint(jointDef);
     },
 });
 

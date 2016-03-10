@@ -4,7 +4,7 @@ cc.Class({
     extends: cc.Component,
     
     editor: {
-        requireComponent: Box2D_Body,
+        requireComponent: Body,
     },
 
     properties: {

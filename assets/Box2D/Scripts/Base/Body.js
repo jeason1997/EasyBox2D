@@ -7,6 +7,7 @@
  *************************************************/
 
 require('Physics');
+require('Engine')
 
 var BodyType = cc.Enum({
     STATIC: 0,
@@ -27,7 +28,7 @@ window.ContactType = cc.Enum({
     END_CONTACT: 3,
 });
 
-window.Box2D_Body = cc.Class({
+window.Body = cc.Class({
 
     extends: cc.Component,
 
@@ -147,7 +148,7 @@ window.Box2D_Body = cc.Class({
 
     createBody: function() {
         var data = this.getBodyData();
-        this.body = Box2D_Engine.instance.world.CreateBody(data.bodyDef);
+        this.body = Engine.instance.world.CreateBody(data.bodyDef);
         for (var i = 0; i < data.fixtureDef.length; ++i) {
             this.body.CreateFixture(data.fixtureDef[i]);
         }
@@ -159,7 +160,7 @@ window.Box2D_Body = cc.Class({
         var fixtureList = new Array();
 
         // Shape
-        var shape = this.getComponent(Box2D_Shape);
+        var shape = this.getComponent(Shape);
         if (shape) {
             shape.body = this;
             if (shape.shapeType === ShapeType.EDGE) {

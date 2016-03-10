@@ -1,4 +1,4 @@
-require('Box2D_Body');
+require('Body');
 
 window.Contact = cc.Class({
     name: 'Contact',

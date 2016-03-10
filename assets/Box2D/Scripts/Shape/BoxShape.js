@@ -6,11 +6,11 @@
  * Describe :
  *************************************************/
 
-require('Box2D_Shape');
+require('Shape');
 
-window.Box2D_BoxShape = cc.Class({
+window.BoxShape = cc.Class({
 
-    extends: Box2D_Shape,
+    extends: Shape,
 
     editor: {
         menu: 'i18n:Box2D.Shape.BoxShape.menu',

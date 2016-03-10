@@ -56,6 +56,6 @@ window.PrismaticJoint = cc.Class({
         jointDef.motorSpeed = this.motorSpeed;
         jointDef.referenceAngle = this.referenceAngle / 360 * (2 * Math.PI);
         
-        this.joint = Box2D_Engine.instance.world.CreateJoint(jointDef);
+        this.joint = Engine.instance.world.CreateJoint(jointDef);
     },
 });

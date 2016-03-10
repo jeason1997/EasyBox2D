@@ -1,5 +1,3 @@
-require('Joint');
-
 window.FrictionJoint = cc.Class({
 
     extends: Joint,
@@ -26,6 +24,6 @@ window.FrictionJoint = cc.Class({
         jointDef.maxTorque = this.maxTorque;
         jointDef.maxForce = this.maxForce;
         
-        this.joint = Box2D_Engine.instance.world.CreateJoint(jointDef);
+        this.joint = Engine.instance.world.CreateJoint(jointDef);
     },
 });

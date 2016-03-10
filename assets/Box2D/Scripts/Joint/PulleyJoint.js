@@ -52,6 +52,6 @@ window.PulleyJoint = cc.Class({
         jointDef.maxLengthA = this.maxLengthA;
         jointDef.maxLengthB = this.maxLengthB;
         jointDef.ratio = this.ratio;
-        this.joint = Box2D_Engine.instance.world.CreateJoint(jointDef);
+        this.joint = Engine.instance.world.CreateJoint(jointDef);
     },
 });

@@ -6,8 +6,6 @@
  * Describe : 
  *************************************************/
 
-require('Joint');
-
 window.DistanceJoint = cc.Class({
 
     extends: Joint,
@@ -49,6 +47,6 @@ window.DistanceJoint = cc.Class({
         jointDef.dampingRation = this.dampingRation;
         jointDef.frequencyHz = this.frequencyHz;
         jointDef.collideConnected = this.enableCollision;
-        this.joint = Box2D_Engine.instance.world.CreateJoint(jointDef);
+        this.joint = Engine.instance.world.CreateJoint(jointDef);
     },
 });

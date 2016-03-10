@@ -1,3 +1,5 @@
+/**************** Global ********************/
+
 // Editor Mode
 window.CC_EDITOR = (cc.engine !== undefined);
 
@@ -8,6 +10,14 @@ window.PTM_RATIO = 32;
 window.Physics = {
     
 };
+
+/********************************************/
+
+
+
+
+
+/**************** Box2D ********************/
 
 // Box2D Defined
 var Box2D = require('box2dweb-commonjs');
@@ -38,7 +48,15 @@ window.b2PrismaticJointDef = Box2D.b2PrismaticJointDef;
 window.b2FrictionJointDef = Box2D.b2FrictionJointDef;
 window.b2PulleyJointDef = Box2D.b2PulleyJointDef;
 
-// Category
+/********************************************/
+
+
+
+
+
+/**************** Physics *******************/
+
+////////////////// Enum //////////////////////
 window.Physics.Category = cc.Enum({
     TYPE_1: 1,
     TYPE_2: 2,
@@ -61,7 +79,8 @@ window.Physics.Category = cc.Enum({
     TYPE_16: 32768,
 });
 
-// Ray Defined
+
+////////////////// Class /////////////////////
 window.Physics.Ray = cc.Class({
     // constructor1: start, end
     // constructor2: start, direction, distant
@@ -92,14 +111,17 @@ window.Physics.Ray = cc.Class({
     },
 });
 
-// Ray Function
+
+//////////////// Function ////////////////////
 window.Physics.RayCast = function(point1, point2, callback) {
     var p1 = new b2Vec2(point1.x / PTM_RATIO, point1.y / PTM_RATIO);
     var p2 = new b2Vec2(point2.x / PTM_RATIO, point2.y / PTM_RATIO);
-    Box2D_Engine.instance.world.RayCast(callback, p1, p2);
+    Engine.instance.world.RayCast(callback, p1, p2);
         
     // Debugdraw
-    if (Box2D_Engine.instance.physicsDebugger.openDebug && Box2D_Engine.instance.physicsDebugger.drawRay) {
-        Box2D_Engine.instance.physicsDebugger.getDebugDraw().GetSprite().drawSegment(point1, point2);
+    if (Engine.instance.physicsDebugger.openDebug && Engine.instance.physicsDebugger.drawRay) {
+        Engine.instance.physicsDebugger.getDebugDraw().GetSprite().drawSegment(point1, point2);
     }
 };
+
+/********************************************/

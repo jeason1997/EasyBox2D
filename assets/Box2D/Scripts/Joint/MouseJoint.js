@@ -1,11 +1,11 @@
-require('Box2D_Body');
+require('Body');
 
 window.MouseJoint = cc.Class({
 
     extends: cc.Component,
 
     editor: {
-        requireComponent: Box2D_Body,
+        requireComponent: Body,
     },
 
     properties: {
@@ -26,7 +26,7 @@ window.MouseJoint = cc.Class({
     start: function () {
         var self = this;
 
-        this.localBody = this.getComponent(Box2D_Body).body;
+        this.localBody = this.getComponent(Body).body;
 
         // this.node.on('touchstart', this.mouseDown, this);
         this.node.on('mousedown', this.mouseDown, this);
@@ -45,7 +45,7 @@ window.MouseJoint = cc.Class({
             },
             onTouchEnded: function (touch, event) {
                 if (self.joint) {
-                    Box2D_Engine.instance.world.DestroyJoint(self.joint);
+                    Engine.instance.world.DestroyJoint(self.joint);
                     self.joint = null;
                 }
             }
@@ -54,7 +54,7 @@ window.MouseJoint = cc.Class({
 
     mouseDown: function (event) {
         if (this.joint) {
-            Box2D_Engine.instance.world.DestroyJoint(this.joint);
+            Engine.instance.world.DestroyJoint(this.joint);
             this.joint = null;
         }
         
@@ -63,18 +63,18 @@ window.MouseJoint = cc.Class({
         var touch = event;
         
         var md = new b2MouseJointDef();
-        md.bodyA = Box2D_Engine.instance.world.GetGroundBody();
+        md.bodyA = Engine.instance.world.GetGroundBody();
         md.bodyB = this.localBody;
         md.target.Set(touch.getLocationX() / PTM_RATIO, touch.getLocationY() / PTM_RATIO);
         md.dampingRatio = this.dampingRatio;
         md.frequencyHz = this.frequencyHz;
         md.collideConnected = this.enableCollision;
         md.maxForce = this.dragForce * this.localBody.GetMass();
-        this.joint = Box2D_Engine.instance.world.CreateJoint(md);
+        this.joint = Engine.instance.world.CreateJoint(md);
         //this.localBody.SetAwake(true);
     },
 
     onDestroy: function () {
-        Box2D_Engine.instance.world.DestroyJoint(this.joint);
+        Engine.instance.world.DestroyJoint(this.joint);
     },
 });

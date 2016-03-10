@@ -6,14 +6,14 @@
  * Describe : The base class of joints.
  *************************************************/
 
-require('Box2D_Body');
+require('Body');
 
 window.Joint = cc.Class({
 
     extends: cc.Component,
 
     editor: {
-        requireComponent: Box2D_Body,
+        requireComponent: Body,
     },
 
     properties: {
@@ -34,7 +34,7 @@ window.Joint = cc.Class({
         },
         targetBody: {
             default: null,
-            type: Box2D_Body,
+            type: Body,
             notify: function () {
                 this.updateDebugDraw();
             },
@@ -66,9 +66,9 @@ window.Joint = cc.Class({
     },
 
     initJoint: function () {
-        this.localBody = this.getComponent(Box2D_Body).body;
+        this.localBody = this.getComponent(Body).body;
         if (!this.targetBody) {
-            this.targetBody = Box2D_Engine.instance.world.GetGroundBody();
+            this.targetBody = Engine.instance.world.GetGroundBody();
         } else {
             this.targetBody = this.targetBody.body;
         }
@@ -77,7 +77,7 @@ window.Joint = cc.Class({
         }
 
         if (this.breakForce > 0) {
-            this.getComponent(Box2D_Body).addContactEvent(ContactType.POST_CONTACT,
+            this.getComponent(Body).addContactEvent(ContactType.POST_CONTACT,
                 this.onPostContact.bind(this));
         }
     },
@@ -89,8 +89,8 @@ window.Joint = cc.Class({
     },
 
     onDestroy: function () {
-        Box2D_Engine.instance.world.DestroyJoint(this.joint);
-        this.getComponent(Box2D_Body).removeContactEvent(ContactType.POST_CONTACT,
+        Engine.instance.world.DestroyJoint(this.joint);
+        this.getComponent(Body).removeContactEvent(ContactType.POST_CONTACT,
             this.onPostContact);
     },
     

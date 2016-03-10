@@ -5,7 +5,7 @@
  * FileName : Box2D_Engine.js
  * Describe : 
  *************************************************/
-
+require('Physics');
 require('Contact');
 
 var PhysicsDebugger = cc.Class({
@@ -54,7 +54,7 @@ var PhysicsDebugger = cc.Class({
     },
 });
 
-window.Box2D_Engine = cc.Class({
+window.Engine = cc.Class({
 
     extends: cc.Component,
     
@@ -130,12 +130,12 @@ window.Box2D_Engine = cc.Class({
 
     onLoad: function () {
 
-        if (Box2D_Engine._instance) {
+        if (Engine._instance) {
             Logger.error('The scene should only have one active Engine at the same time.');
             this.destroy();
             return;
         }
-        Box2D_Engine._instance = this;
+        Engine._instance = this;
 
         this.world = new b2World(this.gravity, this.allowSleep);
 
@@ -208,12 +208,12 @@ window.Box2D_Engine = cc.Class({
     },
 });
 
-Object.defineProperty(Box2D_Engine, 'instance', {
+Object.defineProperty(Engine, 'instance', {
     get: function () {
-        if (!Box2D_Engine._instance) {
+        if (!Engine._instance) {
             var node = new cc.Node('Box2D_Engine');
-            Box2D_Engine._instance = node.addComponent(Box2D_Engine);
+            Engine._instance = node.addComponent(Box2D_Engine);
         }
-        return Box2D_Engine._instance;
+        return Engine._instance;
     },
 });

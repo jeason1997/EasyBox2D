@@ -6,26 +6,23 @@
  * Describe : 
  *************************************************/
 
-require('Box2D_Shape');
+require('Shape');
 
-window.Box2D_EdgeShape = cc.Class({
+window.PolygonShape = cc.Class({
     
-    extends: Box2D_Shape,
+    extends: Shape,
     
     editor: {
-        menu: 'i18n:Box2D.Shape.Box2D_EdgeShape.menu',
+        menu: 'i18n:Box2D.Shape.Box2D_PolygonShape.menu',
         executeInEditMode: false,
     },
 
     properties: {
         shapeType: {
-            default: ShapeType.EDGE,
+            default: ShapeType.POLYGON,
             type: ShapeType,
             readonly: true,
             visible: false,
-        },
-        close: {
-            default: false,
         },
         removePathInGame: {
             default: false,  
@@ -84,13 +81,8 @@ window.Box2D_EdgeShape = cc.Class({
     getShape: function () {
         
         var data = this.getShapeData();
-      
-        var shapes = new Array(data.vertexes.length - 1);
-        for (i = 0; i < data.vertexes.length - 1; ++i) {
-            var shape = new b2PolygonShape();
-            shape.SetAsEdge(data.vertexes[i], data.vertexes[i + 1]);
-            shapes[i] = shape;
-        }
-        return shapes;
+        var shape = new b2PolygonShape();
+        shape.SetAsVector(data.vertexes, data.vertexes.length);
+        return shape;
     },
 });
