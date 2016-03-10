@@ -1,3 +1,11 @@
+/*************************************************
+ * Create   : 2016/1/30
+ * Update   : 2016/3/10
+ * Author   : Jeason1997
+ * FileName : Physics.js
+ * Describe : 
+ *************************************************/
+
 /**************** Global ********************/
 
 // Editor Mode
@@ -82,6 +90,7 @@ window.Physics.Category = cc.Enum({
 
 ////////////////// Class /////////////////////
 window.Physics.Ray = cc.Class({
+    
     // constructor1: start, end
     // constructor2: start, direction, distant
     ctor: function () {

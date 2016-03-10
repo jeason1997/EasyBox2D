@@ -5,9 +5,8 @@
  * FileName : Box2D_Body.js
  * Describe :
  *************************************************/
-
 require('Physics');
-require('Engine')
+require('Engine');
 
 var BodyType = cc.Enum({
     STATIC: 0,
@@ -21,25 +20,16 @@ var BodyData = function(fixtureDef, bodyDef, shapeData) {
     this.shapeData = shapeData;
 };
 
-window.ContactType = cc.Enum({
-    BEGIN_CONTACT: 0,
-    PRE_CONTACT: 1,
-    POST_CONTACT: 2,
-    END_CONTACT: 3,
-});
-
 window.Body = cc.Class({
 
     extends: cc.Component,
 
     editor: {
         menu: 'i18n:Box2D.Body.menu',
-        executeInEditMode: false,
         disallowMultiple: true,
     },
 
     properties: {
-        tag: '',
         bodyType: {
             default: BodyType.DYNAMIC,
             displayName: 'i18n:Box2D.Body.bodyType',
@@ -117,17 +107,13 @@ window.Body = cc.Class({
             default: null,
             visible: false,
         },
-        bodyData: {
-            default: null,
-            visible: false,
-        }
     },
 
     onLoad: function() {
         // 表明当前是否由物理引擎来设置该node的属性
         // 主要是因为下面有'node.on'监听函数来监听属性的变化，如果是由开发者手动
         // 设置node的属性，则body对象也应该更新属性，但如果是由物理引擎设置的，
-        // 就没必要设置后再去设置body的属性
+        // 就没必要设置后再去设置body的属性，避免造成死循环
         this.setPropertiesByEngien = false;
 
         this.node.on('position-changed', function(event) {
@@ -147,17 +133,8 @@ window.Body = cc.Class({
     },
 
     createBody: function() {
-        var data = this.getBodyData();
-        this.body = Engine.instance.world.CreateBody(data.bodyDef);
-        for (var i = 0; i < data.fixtureDef.length; ++i) {
-            this.body.CreateFixture(data.fixtureDef[i]);
-        }
-        this.body.SetUserData(this);
-    },
-
-    getBodyData: function() {
         // Fixture
-        var fixtureList = new Array();
+        var fixtureList = new Array(0);
 
         // Shape
         var shape = this.getComponent(Shape);
@@ -177,7 +154,7 @@ window.Body = cc.Class({
                         if (this.CollisionWith[j])
                             maskBits += Math.pow(2, j - 1);
                     }
-                    if (maskBits == 0) maskBits = 65535;
+                    if (maskBits === 0) maskBits = 65535;
                     var filter = new b2FilterData();
                     filter.categoryBits = this.Category;
                     filter.maskBits = maskBits;
@@ -198,7 +175,7 @@ window.Body = cc.Class({
                     if (this.CollisionWith[i])
                         maskBits += Math.pow(2, i - 1);
                 }
-                if (maskBits == 0) maskBits = 65535;
+                if (maskBits === 0) maskBits = 65535;
                 var filter = new b2FilterData();
                 filter.categoryBits = this.Category;
                 filter.maskBits = maskBits;
@@ -208,7 +185,7 @@ window.Body = cc.Class({
                 fixtureList.push(fixDef);
             }
         } else {
-            Logger.error('Body mush take at least one shape.');
+            cc.error('Body mush take at least one shape.');
             this.destroy();
             return;
         }
@@ -231,10 +208,13 @@ window.Body = cc.Class({
         bodyDef.position = new b2Vec2(this.node.convertToWorldSpaceAR().x / PTM_RATIO,
             this.node.convertToWorldSpaceAR().y / PTM_RATIO);
         bodyDef.angle = -(3.14 / 180) * this.node.convertToWorldRotation();
-
-        this.bodyData = new BodyData(fixtureList, bodyDef, shape.shapeData);
-
-        return this.bodyData;
+        
+        // 创建刚体
+        this.body = Engine.instance.world.CreateBody(bodyDef);
+        for (var i = 0; i < fixtureList.length; ++i) {
+            this.body.CreateFixture(fixtureList[i]);
+        }
+        this.body.SetUserData(this);
     },
 
     update: function(dt) {
@@ -330,5 +310,9 @@ window.Body = cc.Class({
             fixtureList.m_filter.maskBits = maskBits;
             fixtureList = fixtureList.m_next;
         }
+    },
+    
+    onDestroy: function () {
+        Engine.instance.world.DestroyBody(this.body);
     },
 });
