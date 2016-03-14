@@ -17,18 +17,6 @@ window.ShapeType = cc.Enum({
 });
 
 /**
- * @class ShapeData
- * @describe
- */
-window.ShapeData = function(shapeType, offset, radius, box, vertexes){
-    this.shapeType = shapeType;
-    this.offset = offset;
-    this.radius = radius;
-    this.box = box;
-    this.vertexes = vertexes;
-};
-
-/**
  * @class Box2D_Shape
  * @extends cc.Component
  */
@@ -60,10 +48,27 @@ window.Shape = cc.Class({
     //    this.destroy();
     //},
     
-    getShapeData: function () {
-        
+    start: function() {
+        if (CC_EDITOR) {
+            this._canvas = new cc.DrawNode();
+            this.node._sgNode.addChild(this._canvas);
+            this.node.on('size-changed', this.updateDebugDraw, this);
+            this.node.on('scale-changed', this.updateDebugDraw, this);
+            this.updateDebugDraw();
+        }
+    },
+    
+    onDestroy: function () {
+        if (CC_EDITOR) {
+            this.node._sgNode.removeChild(this._canvas);
+            this.node.off('size-changed', this.updateDebugDraw, this);
+            this.node.off('scale-changed', this.updateDebugDraw, this);
+        }
     },
     
     getShape: function () {
+    },
+    
+    updateDebugDraw: function () {
     },
 });

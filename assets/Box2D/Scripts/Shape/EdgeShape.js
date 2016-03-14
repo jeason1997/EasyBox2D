@@ -67,28 +67,20 @@ window.EdgeShape = cc.Class({
         }  
     },
     
-    getShapeData: function () {
+    getShape: function () {
         
         var vets = new Array(this.vertexes.length);
+        
         for (var i = 0; i < this.vertexes.length; ++i) {
             var pos = this.vertexes[i].position;
             var v = new b2Vec2(pos.x / PTM_RATIO, pos.y / PTM_RATIO);
             vets[i] = v;
         }
-       
-        this.shapeData = new ShapeData(this.shapeType, null, null, null, vets);
-        
-        return this.shapeData;
-    },
-    
-    getShape: function () {
-        
-        var data = this.getShapeData();
       
-        var shapes = new Array(data.vertexes.length - 1);
-        for (i = 0; i < data.vertexes.length - 1; ++i) {
+        var shapes = new Array(vets.length - 1);
+        for (i = 0; i < vets.length - 1; ++i) {
             var shape = new b2PolygonShape();
-            shape.SetAsEdge(data.vertexes[i], data.vertexes[i + 1]);
+            shape.SetAsEdge(vets[i], vets[i + 1]);
             shapes[i] = shape;
         }
         return shapes;

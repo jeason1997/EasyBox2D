@@ -51,48 +51,20 @@ window.CircleShape = cc.Class({
         _canvas: null,
     },
 
-    getShapeData: function() {
+    getShape: function() {
 
         var scale = this.node.convertToWorldScale();
-
+        
         if (this.sameAsNode) {
             this.diameter = this.node.width * scale.x;
         }
-
-        this.shapeData = new ShapeData(
-            this.shapeType,
-            new b2Vec2(this.offset.x / PTM_RATIO, this.offset.y / PTM_RATIO),
-            this.diameter / 2 / PTM_RATIO,
-            null
-        );
-
-        return this.shapeData;
-    },
-
-    getShape: function() {
-
-        var data = this.getShapeData();
-        var shape;
-        shape = new b2CircleShape(data.radius);
-        shape.SetLocalPosition(data.offset);
+        
+        var shape = new b2CircleShape(this.diameter / 2 / PTM_RATIO);
+        shape.SetLocalPosition(new b2Vec2(this.offset.x / PTM_RATIO, this.offset.y / PTM_RATIO));
 
         return shape;
     },
-
-    start: function() {
-        if (CC_EDITOR) {
-            this._canvas = new cc.DrawNode();
-            this.node._sgNode.addChild(this._canvas);
-            this.node.on('size-changed', function(event) {
-                this.updateDebugDraw();
-            }, this);
-            this.node.on('scale-changed', function(event) {
-                this.updateDebugDraw();
-            }, this);
-            this.updateDebugDraw();
-        }
-    },
-
+    
     updateDebugDraw: function() {
         if (CC_EDITOR) {
             var diameter = this.diameter;

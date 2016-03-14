@@ -64,25 +64,18 @@ window.PolygonShape = cc.Class({
         }  
     },
     
-    getShapeData: function () {
+    getShape: function () {
         
         var vets = new Array(this.vertexes.length);
+        
         for (var i = 0; i < this.vertexes.length; ++i) {
             var pos = this.vertexes[i].position;
             var v = new b2Vec2(pos.x / PTM_RATIO, pos.y / PTM_RATIO);
             vets[i] = v;
         }
-       
-        this.shapeData = new ShapeData(this.shapeType, null, null, null, vets);
         
-        return this.shapeData;
-    },
-    
-    getShape: function () {
-        
-        var data = this.getShapeData();
         var shape = new b2PolygonShape();
-        shape.SetAsVector(data.vertexes, data.vertexes.length);
+        shape.SetAsVector(vets, vets.length);
         return shape;
     },
 });

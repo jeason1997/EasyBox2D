@@ -1,16 +1,16 @@
 cc.Class({
     extends: cc.Component,
+    
+    editor: {
+        executeInEditMode: true,
+    },
 
     onLoad: function () {
-       
-            this.getComponent(Body).addContactEvent(ContactType.POST_CONTACT,
-                this.onPostContact.bind(this));
-        
-    },
-
-    onPostContact: function (contact) {
-        if (contact.impulse.normalImpulses[0] >= 100) {
-            this.node.destroy();
+        if (CC_EDITOR)
+        {
+         var fs = require('fs');
+           
         }
     },
+    
 });

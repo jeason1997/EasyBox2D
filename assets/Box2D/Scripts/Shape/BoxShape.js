@@ -51,50 +51,22 @@ window.BoxShape = cc.Class({
         _canvas: null,
     },
 
-    getShapeData: function() {
+    getShape: function() {
 
         var scale = this.node.convertToWorldScale();
-
+        
         if (this.sameAsNode) {
             this.box.x = this.node.width * scale.x;
             this.box.y = this.node.height * scale.y;
         }
-
-        this.shapeData = new ShapeData(
-            this.shapeType,
-            new b2Vec2(this.offset.x / PTM_RATIO, this.offset.y / PTM_RATIO),
-            null,
-            // half width, half height
-            new b2Vec2(this.box.x / 2 / PTM_RATIO, this.box.y / 2 / PTM_RATIO)
-        );
-
-        return this.shapeData;
-    },
-
-    getShape: function() {
-
-        var data = this.getShapeData();
-        var shape;
-        shape = new b2PolygonShape();
-        shape.SetAsBox(data.box.x, data.box.y);
+        
+        var shape = new b2PolygonShape();
+        shape.SetAsOrientedBox(this.box.x / 2 / PTM_RATIO, this.box.y / 2 / PTM_RATIO,
+            new b2Vec2(this.offset.x / PTM_RATIO, this.offset.y / PTM_RATIO), 0);
 
         return shape;
     },
-
-    start: function() {
-        if (CC_EDITOR) {
-            this._canvas = new cc.DrawNode();
-            this.node._sgNode.addChild(this._canvas);
-            this.node.on('size-changed', function(event) {
-                this.updateDebugDraw();
-            }, this);
-            this.node.on('scale-changed', function(event) {
-                this.updateDebugDraw();
-            }, this);
-            this.updateDebugDraw();
-        }
-    },
-
+    
     updateDebugDraw: function() {
         if (CC_EDITOR) {
             if (this.sameAsNode) {
@@ -106,11 +78,11 @@ window.BoxShape = cc.Class({
             var scaleY = this.node._sgNode.scaleY;
             this._canvas.clear();
             this._canvas.drawRect(
-                new cc.Vec2(-this.box.x / 2 / scaleX, -this.box.y / 2 / scaleY),
-                new cc.Vec2(this.box.x / 2 / scaleX, this.box.y / 2 / scaleY),
+                new cc.Vec2(-this.box.x / 2 / scaleX + this.offset.x, -this.box.y / 2 / scaleY + this.offset.y),
+                new cc.Vec2(this.box.x / 2 / scaleX + this.offset.x, this.box.y / 2 / scaleY + this.offset.y),
                 new cc.Color(127, 229, 127, 76),
                 5,
                 new cc.Color(127, 229, 127, 255));
         }
     },
-});
+ });
