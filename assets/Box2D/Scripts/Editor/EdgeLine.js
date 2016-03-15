@@ -1,9 +1,9 @@
 window.EdgeLine = cc.Class({
-    
+
     extends: cc.Component,
-    
+
     editor: {
-        executeInEditMode: true,  
+        executeInEditMode: true,
     },
 
     properties: {
@@ -17,37 +17,40 @@ window.EdgeLine = cc.Class({
             type: cc.Node,
             visible: false,
         },
+        _pathClose: false,
     },
 
 
     onLoad: function () {
-        // 加了后此节点只在编辑器模式下显示，允许后就消失了
-        //this.node._objFlags |= cc.Object.Flags.DontSave;
+        if (CC_EDITOR) {
+            // 加了后此节点只在编辑器模式下显示，允许后就消失了
+            //this.node._objFlags |= cc.Object.Flags.DontSave;
         
-        pathClose = this.node.parent.getComponent(Box2D_Shape).close;
-        
-        this.node.on('position-changed', function ( event ) {
-            
-            if (this.lastPoint) {
-                // Update position to this point.
-                this.lastPoint.getComponent(EdgeLine).lineToPoint();
+            this._pathClose = this.node.parent.getComponent(Shape).close;
+
+            this.node.on('position-changed', function (event) {
+
+                if (this.lastPoint) {
+                    // Update position to this point.
+                    this.lastPoint.getComponent(EdgeLine).lineToPoint();
+                }
+                else if (this._pathClose) {
+                    // Path close
+                    this.node.parent.children[this.node.parent.childrenCount - 1].position = this.node.position;
+                }
+
+                this.lineToPoint();
+
+            }, this);
+
+            if (!this.nextPoint) {
+                this.node.width = 0;
             }
-            else if (pathClose) {
-                // Path close
-                this.node.parent.children[this.node.parent.childrenCount - 1].position = this.node.position;
-            }
-        
-            this.lineToPoint();
-            
-        }, this);
-        
-        if (!this.nextPoint) {
-            this.node.width = 0;
         }
     },
-    
+
     lineToPoint: function () {
-        
+
         if (this.nextPoint) {
             // Update this point's position to the nextPoint
             var p1 = this.node.position;
@@ -56,14 +59,14 @@ window.EdgeLine = cc.Class({
             var y = p2.y - p1.y;
             var rot = Math.atan2(x, y) / (2 * Math.PI) * 360 - 90;
             this.node.rotation = rot;
-            
+
             this.node.width = cc.pDistance(p1, p2);
-        } 
+        }
         else {
             // Last point's path's length much be zero.
             this.node.width = 0;
             // Path close
-            if (pathClose)
+            if (this._pathClose)
                 this.node.parent.children[0].position = this.node.position;
         }
     },
