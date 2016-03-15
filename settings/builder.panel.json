@@ -1,8 +1,0 @@
-{
-  "excludeScenes": [],
-  "packageName": "org.cocos2d.example_cases",
-  "platform": "win32",
-  "startScene": "48f2ebcf-cc11-41d1-9895-418222cb7bf7",
-  "startSceneUuid": "72729584-e887-4af5-b77e-6596b9350081",
-  "title": "example_cases"
-}
