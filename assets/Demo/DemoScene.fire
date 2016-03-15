@@ -6493,7 +6493,7 @@
       "__id__": 202
     },
     "world": null,
-    "_N$playInEditor": false,
+    "_N$playInEditor": true,
     "_N$gravity": {
       "__type__": "cc.Vec2",
       "x": 0,
