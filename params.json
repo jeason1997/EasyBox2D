@@ -1,0 +1,6 @@
+{
+  "name": "Easybox2d",
+  "tagline": "EasyBox2D is a 2D physics compoment for CocosCreator",
+  "body": "# Cocos Creator Box2D 物理引擎组件\r\n\r\n>Creator仿Unity3D物理引擎组件。\r\n\r\n## 项目结构\r\n\r\n```\r\nassets\r\n  |--Box2D （物理引擎组件）\r\n  |    |--Prefab （预设体）\r\n  |    |--Scripts（组件脚本）\r\n  |    |    |--Base（核心脚本）\r\n  |    |    |--Contact（碰撞器）\r\n  |    |    |--Editor（编辑器相关）\r\n  |    |    |--Effector（效应器）\r\n  |    |    |--Joint（节点定义）\r\n  |    |    |--Shape（形状定义）\r\n  |    |    |--Utils（工具相关）\r\n  |    |--Texture（组件默认贴图）\r\n  |--Demo（范例）\r\n  |   |--Texture（贴图资源）\r\n  |--scripts（公共脚本）\r\nnode_modules\r\n  |--box2dweb-commonjs  （Box2D核心脚本）\r\npackages\r\n  |--Box2D  （Box2D插件脚本）\r\n```\r\n\r\n### 详细说明 Box2D\r\n\r\n- [Body](assets/cases/01_graphics/01_sprite)\r\n- [Shape](assets/cases/01_graphics/02_particle)\r\n  - [BoxShape](assets/cases/01_graphics/02_particle/simple_particle.md)\r\n- [Joint](assets/cases/01_graphics/02_particle)\r\n  - [MouseJoint](assets/cases/01_graphics/02_particle/simple_particle.md)\r\n\r\n\r\n\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
