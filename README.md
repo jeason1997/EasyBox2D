@@ -1,6 +1,6 @@
 # Cocos Creator Box2D 物理引擎组件
 
-本项目由Jeason1997开发，为Creator上仿Unity3D物理引擎组件的插件。
+>Creator仿Unity3D物理引擎组件。
 
 ## 项目结构
 

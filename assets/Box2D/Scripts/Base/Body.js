@@ -80,12 +80,12 @@ window.Body = cc.Class({
             notify: function() {},
         },
         Category: {
-            default: Physics.Category.TYPE_1,
+            default: 0,
             type: Physics.Category,
         },
         CollisionWith: {
-            default: [],
-            type: ['Boolean'],
+            default: new Physics.CollsionTarget(),
+            type: Physics.CollsionTarget,
         },
         onBeginContact: {
             default: [],

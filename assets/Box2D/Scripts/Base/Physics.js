@@ -65,27 +65,7 @@ window.b2PulleyJointDef = Box2D.b2PulleyJointDef;
 /**************** Physics *******************/
 
 ////////////////// Enum //////////////////////
-window.Physics.Category = cc.Enum({
-    TYPE_1: 1,
-    TYPE_2: 2,
-    TYPE_3: 4,
-    TYPE_4: 8,
-
-    TYPE_5: 16,
-    TYPE_6: 32,
-    TYPE_7: 64,
-    TYPE_8: 128,
-
-    TYPE_9: 256,
-    TYPE_10: 512,
-    TYPE_11: 1024,
-    TYPE_12: 2048,
-
-    TYPE_13: 4096,
-    TYPE_14: 8192,
-    TYPE_15: 16384,
-    TYPE_16: 32768,
-});
+require('Category');
 
 
 ////////////////// Class /////////////////////

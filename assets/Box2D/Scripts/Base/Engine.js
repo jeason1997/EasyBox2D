@@ -122,6 +122,13 @@ window.Engine = cc.Class({
             default: new PhysicsDebugger(),
             type: PhysicsDebugger,
         },
+        categoryType: {
+            default: [],
+            type: ['String'],
+            notify: function () {
+                Editor.sendToCore('creator-box2d:generateEnum', this.categoryType);
+            },
+        },
         world: {
             default: null,
             visible: false,
