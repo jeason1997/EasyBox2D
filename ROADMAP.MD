@@ -14,6 +14,8 @@
  * 实现Spring Joint，以及优化各种Joint的接口
  * 将Effector里的Area,Constant,Point,Surface修复下
  * 将合并组件里的Wheel实现
+ * 初次添加Engine组件时，Engine的Category从JSON配置文件里读取并初始化，而不是一个空的数组
+ * Body的Category Target Mask实现
  * 为所有组件添加必要API
  * 为所有可用组件添加编辑器菜单，并完善i18n文件
  * 编写初步文档以及API

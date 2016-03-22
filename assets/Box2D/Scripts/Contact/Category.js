@@ -12,8 +12,6 @@ window.Physics.Category = cc.Enum({
 	EE: 1024,
 	FF: 2048,
 	AAA: 4096,
-	AAAA: 8192,
-	BBQ: 16384,
 });
 
 window.Physics.CollsionTarget = cc.Class({
@@ -33,8 +31,6 @@ window.Physics.CollsionTarget = cc.Class({
 		EE: false,
 		FF: false,
 		AAA: false,
-		AAAA: false,
-		BBQ: false,
 	},
 	clone: function () { return new Physics.CollsionTarget(); },
 });
