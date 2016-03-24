@@ -15,25 +15,26 @@ window.EdgeDraw = cc.Class({
 });
 
 EdgeDraw.updateEdge = function (shape) {
-    if (shape[0].vertexes.length > shape[0].node.childrenCount) {
-        for (var i = shape[0].node.childrenCount; i < shape[0].vertexes.length; ++i) {
+    if (shape.vertexes.length > shape.node.childrenCount) {
+        for (var i = shape.node.childrenCount; i < shape.vertexes.length; ++i) {
             var child = cc.instantiate(EdgeDraw._getLinePrefab());
             child.name = 'P_' + i;
-            shape[0].vertexes[i] = child;
-            shape[0].node.addChild(child);
+            shape.vertexes[i] = child;
+            shape.node.addChild(child);
             if (i > 0) {
-                shape[0].node.children[i - 1].getComponent(EdgeLine).nextPoint = child;
-                child.getComponent(EdgeLine).lastPoint = shape[0].node.children[i - 1];
+                shape.node.children[i - 1].getComponent(EdgeLine).nextPoint = child;
+                child.getComponent(EdgeLine).lastPoint = shape.node.children[i - 1];
             }
         }
     }
     else {
-        for (var j = shape[0].node.childrenCount - 1; j >= shape[0].vertexes.length; --j) {
+        for (var j = shape.node.childrenCount - 1; j >= shape.vertexes.length; --j) {
             if (j > 0)
-                shape[0].node.children[j - 1].getComponent(EdgeLine).nextPoint = null;
-            shape[0].node.removeChild(shape[0].node.children[j]);
+                shape.node.children[j - 1].getComponent(EdgeLine).nextPoint = null;
+            shape.node.removeChild(shape.node.children[j]);
         }
     }
+    return shape.vertexes;
 };
 
 EdgeDraw._getLinePrefab = function () {

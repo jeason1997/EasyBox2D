@@ -34,7 +34,10 @@ window.EdgeShape = cc.Class({
         vertexes: {
             default: [],
             type: cc.Node,
-            notify: CC_EDITOR && function () { EdgeDraw.updateEdge([this]); },
+            notify: function () {
+                if (CC_EIDTOR)
+                    this.vertexes = EdgeDraw.updateEdge(this);
+            },
         },
     },
 
