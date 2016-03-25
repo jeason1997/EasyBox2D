@@ -61,6 +61,7 @@ window.Engine = cc.Class({
     editor: {
         menu: 'i18n:Box2D.Engine.menu',
         disallowMultiple: true,
+        help: 'http://localhost:7456/index.html',
     },
 
     statics: {
@@ -124,7 +125,7 @@ window.Engine = cc.Class({
         },
         categoryType: {
             default: [],
-            type: ['String'],
+            type: cc.String,
             notify: function () {
                 Editor.sendToCore('creator-box2d:generateEnum', this.categoryType);
             },

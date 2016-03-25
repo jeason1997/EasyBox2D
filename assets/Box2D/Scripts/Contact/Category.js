@@ -10,7 +10,7 @@ window.Physics.Category = cc.Enum({
 	CC: 256,
 	DD: 512,
 	EE: 1024,
-	FF: 2048,
+	FF你: 2048,
 	AAA: 4096,
 });
 
@@ -29,7 +29,7 @@ window.Physics.CollsionTarget = cc.Class({
 		CC: false,
 		DD: false,
 		EE: false,
-		FF: false,
+		FF你: false,
 		AAA: false,
 	},
 	clone: function () { return new Physics.CollsionTarget(); },
