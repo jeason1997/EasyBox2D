@@ -14,15 +14,16 @@ window.CircleShape = cc.Class({
 
     editor: {
         menu: 'i18n:Box2D.Shape.CircleShape.menu',
+        inspector: 'packages://box2d/inspector/circleShape.js',
         executeInEditMode: true,
     },
 
     properties: {
+        radius: 100,
         shapeType: {
             default: ShapeType.CIRCLE,
             type: ShapeType,
             readonly: true,
-            visible: false,
         },
         sameAsNode: {
             default: true,

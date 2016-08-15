@@ -75,7 +75,8 @@ window.Engine = cc.Class({
             tooltip: 'i18n:Box2D.Engine.playInEditor_tooltip',
             notify: function () {
                 if (CC_EDITOR) {
-                    Editor.Panel.open('Box2D.panel');
+                    Editor.Panel.open('box2d');
+                    Editor.Ipc.sendToPanel( 'box2d', 'test', '123');
                 }
             },
         },
@@ -127,7 +128,7 @@ window.Engine = cc.Class({
             default: [],
             type: cc.String,
             notify: function () {
-                Editor.sendToCore('creator-box2d:generateEnum', this.categoryType);
+                Editor.Ipc.sendToPackage('box2d', 'generateEnum', this.categoryType);
             },
         },
         world: {

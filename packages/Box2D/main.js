@@ -37,19 +37,15 @@ var saveFile = function (content) {
                 );
             return;
         }
-
         let meta = result.meta;
         let diff = result.subMetas;
-
         Editor.sendToAll('asset-db:asset-changed', {
             uuid: meta.uuid,
             type: meta.assetType(),
         });
-
         if (diff.deleted.length > 0) {
             Editor.sendToAll('asset-db:assets-deleted', diff.deleted);
         }
-
         if (diff.added.length > 0) {
             Editor.sendToAll('asset-db:assets-created', diff.added);
         }
@@ -60,10 +56,11 @@ var saveFile = function (content) {
     */
     
     // 或者直接IPC一句话就搞定（其实内部也是通过IPC完成的）
-    Editor.sendToCore( 'asset-db:save-exists', filePath, content );
+    Editor.Ipc.sendToMain( 'asset-db:save-exists', filePath, content );
 };
 
 module.exports = {
+
     load() {
     },
 
@@ -71,10 +68,10 @@ module.exports = {
     },
 
     messages: {
-        'open'() {
-            Editor.Panel.open('creator-box2d.panel');
+        open() {
+            Editor.Panel.open('box2d');
         },
-        'generateEnum'(arg, arg2) {
+        generateEnum(arg, arg2) {
             saveFile(generateEnum(arg2));
         },
     },

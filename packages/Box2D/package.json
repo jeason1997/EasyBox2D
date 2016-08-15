@@ -1,24 +1,22 @@
 {
-    "name": "creator-box2d",
-    "version": "0.9.1",
-    "description": "Box2D For CocosCreator.",
-    "author": "Jeason1997",
-    "main": "main.js",
-    "main-menu": {
-        "i18n:creator-box2d.Editor.menu_ingame": {
-            "message": "creator-box2d:open",
-            "icon": "res/icon.jpg",
-            "accelerator": "Ctrl+Shift+A"
-        }
-    },
-    "panels": {
-        "panel": {
-            "frame": "panel/panel.html",
-            "type": "dockable",
-            "title": "i18n:creator-box2d.Editor.inGamePanel",
-            "width": 800,
-            "height": 600,
-            "messages": []
-        }
+  "name": "box2d",
+  "version": "1.0.1",
+  "description": "Box2D For CocosCreator.",
+  "author": "Jeason1997",
+  "main": "main.js",
+  "main-menu": {
+    "i18n:box2d.Editor.menu_ingame": {
+      "message": "box2d:open"
     }
+  },
+  "panel": {
+    "main": "panel/index.js",
+    "type": "dockable",
+    "title": "i18n:Box2D.Editor.inGamePanel",
+    "width": 400,
+    "height": 300
+  },
+  "gizmos": {
+    "CircleShape": "packages://box2d/gizmos/CircleShape.js"
+  }
 }

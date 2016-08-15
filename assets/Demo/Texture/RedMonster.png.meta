@@ -6,7 +6,7 @@
   "filterMode": "bilinear",
   "subMetas": {
     "RedMonster": {
-      "ver": "1.0.2",
+      "ver": "1.0.3",
       "uuid": "993767db-2752-4b8b-9cc1-16fd133db4e9",
       "rawTextureUuid": "fab56a16-d34f-49a7-b2d4-2812895543eb",
       "trimType": "auto",
@@ -18,6 +18,8 @@
       "trimY": 0,
       "width": 68,
       "height": 75,
+      "rawWidth": 68,
+      "rawHeight": 75,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,
