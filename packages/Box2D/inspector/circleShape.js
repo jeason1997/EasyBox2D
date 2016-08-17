@@ -5,7 +5,7 @@ Vue.component('circleShape', {
         <img src={{imgPath}} width="294" height="166" />
     </a>
     <p>
-        <ui-button class="red" @confirm="_onBtnPress">Custom Size</ui-button>        
+        <ui-button class="red" @confirm="_onBtnPress">Editor Shape</ui-button>        
     </p>
     <ui-label class="orange circle">属性</ui-label>
     <ui-section class="big" text="Box2D">

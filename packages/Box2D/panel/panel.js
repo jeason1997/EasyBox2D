@@ -100,8 +100,8 @@ Editor.Panel.extend({
   },
 
   messages: {
-    'box2djs:test'(event) {
-      Editor.log('Hello!');
+    'test'(event) {
+      cc.log('Hello!');
     },
   },
 });

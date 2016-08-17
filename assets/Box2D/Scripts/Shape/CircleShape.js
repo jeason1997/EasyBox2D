@@ -19,7 +19,26 @@ window.CircleShape = cc.Class({
     },
 
     properties: {
-        radius: 100,
+        editing: false,
+        _radius: 50,
+        /**
+         * !#en Circle radius
+         * !#zh 圆形半径
+         * @property radius
+         * @type {Number}
+         */
+        radius: {
+            get: function () {
+                return this._radius;
+            },
+            set: function (value) {
+                this._radius = value < 0 ? 0 : value;
+            }
+        },
+        
+        
+        
+        
         shapeType: {
             default: ShapeType.CIRCLE,
             type: ShapeType,

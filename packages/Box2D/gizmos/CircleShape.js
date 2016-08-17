@@ -1,156 +1,182 @@
+'use strict';
+
+let Tools = Editor.require('app://editor/page/gizmos/elements/tools');
+
+let snapPixel = Editor.GizmosUtils.snapPixel;
+let snapPixelWihVec2 = Editor.GizmosUtils.snapPixelWihVec2;
+
+let ToolType = {
+    None: 0,
+    Side: 1,
+    Center: 2
+};
+
 class CircleShape extends Editor.Gizmo {
-    init() {
-        // 初始化一些参数
-    }
+    onCreateRoot () {
+        let startOffset;
+        let startRadius;
+        let pressx, pressy;
+        let updated;
 
-    createGizmoCallBacks() {
-        // 创建 gizmo 操作回调
-
-        // 申明一些局部变量
-        let startRadius;        // 按下鼠标时记录的圆半径
-        let pressx, pressy;     // 按下鼠标时记录的鼠标位置
-        let updated;            // 记录 gizmo 是否被操作过
-
-        return {
-            /**
-             * 在 gizmo 上按下鼠标时触发
-             * @property x 按下点的 x 坐标
-             * @property y 按下点的 y 坐标
-             * @property event mousedown dom event
-             */
-            start: (x, y, event) => {
+        this.createTool({
+            start: (type, x, y) => {
+                startOffset = this.target.offset;
                 startRadius = this.target.radius;
                 pressx = x;
                 pressy = y;
                 updated = false;
             },
 
-            /**
-             * 在 gizmo 上按下鼠标移动时触发
-             * @property dx 鼠标移动的 x 位移
-             * @property dy 鼠标移动的 y 位移
-             * @property event mousedown dom event
-             */
-            update: (dx, dy, event) => {
+            update: (type, dx, dy) => {
                 if (dx === 0 && dy === 0) {
                     return;
                 }
                 updated = true;
 
-                // 获取 gizmo 依附的节点
                 let node = this.node;
+                _Scene.Undo.recordNode( node.uuid );
 
-                // 记录节点信息的 undo 信息，注意参数为节点的 uuid
-                _Scene.Undo.recordNode(node.uuid);
+                if (type === ToolType.Center) {
+                    dy = -dy;
 
-                // 获取 svg view 坐标系下点
-                let x = pressx + dx, y = pressy + dy;
-                // 获取节点世界坐标系下点
-                let pos = this._view.pixelToWorld(cc.v2(x, y));
-                // 转换坐标点到节点下
-                pos = node.convertToNodeSpaceAR(pos);
-                // 计算 radius
-                let radius = pos.mag();
-                // js 在做一些计算后会出现小数位过长的情况， Editor.Math.toPrecision 会帮助做一些小数位的截取
-                let minDifference = Editor.Math.numOfDecimalsF(1.0 / this._view.scale);
-                this.target.radius = Editor.Math.toPrecision(radius, minDifference);
+                    let t = cc.affineTransformClone( node.getWorldToNodeTransform() );
+                    t.tx = t.ty = 0;
+                    
+                    let d = cc.v2(cc.pointApplyAffineTransform(dx, dy, t)).add(startOffset);
+                    this.target.offset = _Scene.adjustVec2(d);
+                }
+                else {
+                    let canvasSize = cc.view.getCanvasSize();
+                    let o = node.convertToNodeSpaceAR(cc.v2(pressx + dx, canvasSize.height - pressy - dy));
+                    let d = o.sub(startOffset).mag();
+                    this.target.radius = Editor.Math.toPrecision(d);
+                }
 
-                // 更新 gizmo view 
                 this._view.repaintHost();
             },
 
-            /**
-             * 在 gizmo 抬起鼠标时触发
-             * @property event mousedown dom event
-             */
-            end: (event) => {
-                // 判断是否有操作过 gizmo, 没有则跳过处理
+            end: () => {
                 if (updated) {
-                    // 如果 gizmo 有修改需要进入 animation 编辑的属性，需要调用此接口来更新数据
-                    // _Scene.AnimUtils.recordNodeChanged(this.node);
-
-                    // 推送修改到 undo 下，结束 undo
-                    _Scene.Undo.commit();
+                    _Scene.AnimUtils.recordNodeChanged(this.node);
+                    _Scene.Undo.commit();    
                 }
+            }
+        });
+    }
+
+    createTool (callbacks) {
+        let root = this._root;
+        let circle;
+        let sidePointGroup;
+        let lp, tp, rp, bp;     // size sides points
+        let dragArea;           // center drag area
+
+        function creatToolCallbacks (type) {
+            return {
+                start: function ( x, y, event ) {
+                    callbacks.start.call(root, type, x, y, event);
+                },
+                update: function ( dx, dy, event ) {
+                    callbacks.update.call(root, type, dx, dy, event);
+                },
+                end: function ( event ) {
+                    callbacks.end.call(root, type, event);
+                }
+            };
+        }
+
+        function createSidePoint (svg, cursor) {
+            return Tools.circleTool(svg, 5, {color: '#7fc97a'}, null, creatToolCallbacks(ToolType.Side))
+                .style( 'cursor', cursor );
+        }
+
+        // init center drag area
+        root.dragArea = dragArea = root.circle('0,0,0,0,0,0')
+            .fill( { color: 'rgba(0,128,255,0.2)' } )
+            .stroke('none')
+            .style( 'pointer-events', 'fill' )
+            .style('cursor', 'move')
+            .hide()
+            ;
+
+        Editor.GizmosUtils.addMoveHandles( dragArea, creatToolCallbacks(ToolType.Center) );
+
+        // init circle
+        circle = root.circle = Tools.circleTool(root, 0, null, {color: '#7fc97a'}, creatToolCallbacks(ToolType.Side));
+        circle.style( 'pointer-events', 'none' );
+
+        // init sides points
+        sidePointGroup = root.sidePointGroup = root.group();
+        sidePointGroup.hide();
+
+        lp = createSidePoint(sidePointGroup, 'col-resize');
+        tp = createSidePoint(sidePointGroup, 'row-resize');
+        rp = createSidePoint(sidePointGroup, 'col-resize');
+        bp = createSidePoint(sidePointGroup, 'row-resize');
+
+        // set bounds
+        root.plot =  (pos, radius) => {
+            circle.radius(radius).center(pos.x, pos.y);
+            dragArea.radius(radius).center(pos.x, pos.y);
+
+            if (this._targetEditing) {
+                lp.center(pos.x - radius, pos.y);
+                tp.center(pos.x, pos.y + radius);
+                rp.center(pos.x + radius, pos.y);
+                bp.center(pos.x, pos.y - radius);
             }
         };
     }
 
-    onCreateRoot() {
-        // 创建 svg 根节点的回调，可以在这里创建你的 svg 工具
-        // this._root 可以获取到 Editor.Gizmo 创建的 svg 根节点
+    onUpdate () {
+        if (this.target.editing) {
+            this.enterEditing();
+        }
+        else {
+            this.leaveEditing();
+        }
 
-        // 实例：
-
-        // 创建一个 svg 工具
-        // group 函数文档 : http://documentup.com/wout/svg.js#groups
-        this._tool = this._root.group();
-
-        let circle = this._tool.circle()
-            // 设置 circle fill 样式
-            .fill({ color: 'rgba(0,128,255,0.2)' })
-            // 设置 circle stroke 样式
-            .stroke({ color: 'rgba(0,128,255,0.4)', width: 1 })
-            // 设置 circle 的点击区域，这里设置的是根据 fill 模式点击
-            .style('pointer-events', 'fill')
-            // 设置 circle 鼠标样式
-            .style('cursor', 'pointer')
-            ;
-
-        // 为 tool 定义一个绘画函数，可以为其他名字
-        this._tool.plot = (radius, position) => {
-            this._tool.move(position.x, position.y);
-            circle.radius(radius);
-        };
-
-        // 创建 gizmo 操作回调函数
-        let callbacks = this.createGizmoCallBacks();
-
-        // 为 tool 添加一个操作回调
-        // 当在 tool 上按下鼠标时，会创建一个 drag mask
-        // 如果不需要此辅助函数，可以自行对 tool 注册 mousedown, mousemove, mouseup 来进行操作
-        Editor.GizmosUtils.addMoveHandles(this._tool, { cursor: 'pointer' }, callbacks);
-    }
-
-    onUpdate() {
-        // 更新 svg 工具
-
-        // 获取 gizmo 依附的组件
-        let target = this.target;
-
-        // 获取 gizmo 依附的节点
         let node = this.node;
+        let radius = this.target.radius;
 
-        // 获取组件半径
-        let radius = target.radius;
+        let p  = snapPixelWihVec2( this._view.worldToPixel( node.convertToWorldSpaceAR(this.target.offset) ) );
 
-        // 获取节点世界坐标
-        let worldPosition = node.convertToWorldSpaceAR(cc.p(0, 0));
+        let p1 = node.convertToWorldSpace(cc.v2(0, 0));
+        let p2 = node.convertToWorldSpace(cc.v2(radius, 0));
+        let d = p1.sub(p2).mag();
 
-        // 转换世界坐标到 svg view 上
-        // svg view 的坐标体系和节点坐标体系不太一样，这里使用内置函数来转换坐标
-        let viewPosition = this._view.worldToPixel(worldPosition);
-
-        // 对齐坐标，防止 svg 因为精度问题产生抖动
-        let p = Editor.GizmosUtils.snapPixelWihVec2(viewPosition);
-
-        // 获取世界坐标下圆半径
-        let worldPosition2 = node.convertToWorldSpaceAR(cc.p(radius, 0));
-        let worldRadius = worldPosition.sub(worldPosition2).mag();
-        worldRadius = Editor.GizmosUtils.snapPixel(worldRadius);
-
-        // 移动 svg 工具到坐标
-        this._tool.plot(worldRadius, p);
+        this._root.plot(p, snapPixel(d));
     }
 
-    // 如果需要自定义 Gizmo 显示的时机，重写 visible 函数即可
-    visible() {
-        return true;
+    enterEditing () {
+        if (this._targetEditing) {
+            return;
+        }
+
+        let root = this._root;
+        root.circle.style( 'pointer-events', 'stroke' );
+        root.dragArea.show();
+        root.sidePointGroup.show();
+
+        this._targetEditing = true;
     }
 
-    // Gizmo 创建在哪个 Layer 中 : foreground, scene, background, 默认创建在 scene Layer
-    layer() {
-        return 'scene';
+    leaveEditing () {
+        if (!this._targetEditing) {
+            return;
+        }
+
+        let root = this._root;
+        root.circle.style( 'pointer-events', 'none' );
+        root.dragArea.hide();
+        root.sidePointGroup.hide();
+
+        this._targetEditing = false;
+    }
+
+    hide () {
+        Editor.Gizmo.prototype.hide.call(this);
+        this.target.editing = false;
     }
 }
 

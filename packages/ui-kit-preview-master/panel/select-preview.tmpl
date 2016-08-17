@@ -1,0 +1,122 @@
+<div class="section">
+  <h3>Standard</h3>
+  <div class="group g-01">
+    <ui-select value="4">
+      <option value="0">Foo</option>
+      <option value="1">Bar</option>
+      <option value="2">Hello</option>
+      <option value="3">World</option>
+      <option value="4">A Long Text</option>
+    </ui-select>
+    <span class="text"></span>
+  </div>
+
+  <div class="group g-02">
+    <ui-select disabled>
+      <option value="0">Foo</option>
+      <option value="1" selected>Bar</option>
+      <option value="2">Hello</option>
+      <option value="3">World</option>
+      <option value="4">A Long Text</option>
+    </ui-select>
+    <span class="text"></span>
+    <ui-button id="focus" class="mini blue">Focus</ui-button>
+  </div>
+
+  <div class="group g-03">
+    <ui-select style="width: 100px">
+      <option value="0">A Long Text</option>
+      <option value="1">A Long Long Text</option>
+      <option value="2">A Long Long Long Text</option>
+      <option value="3" selected>A Long Long Long Long Text</option>
+    </ui-select>
+  </div>
+
+  <span id="event">event: ---</span>
+</div>
+
+<div class="section">
+  <h3>State</h3>
+  <div style="position: relative;">
+    <div class="group">
+      <ui-select style="width: 200px;">
+        <option value="0">Normal</option>
+      </ui-select>
+    </div>
+    <div class="group">
+      <ui-select style="width: 200px;" focused>
+        <option value="0">Focused</option>
+      </ui-select>
+    </div>
+    <div class="group">
+      <ui-select style="width: 200px;" disabled>
+        <option value="0">Disabled</option>
+      </ui-select>
+    </div>
+    <div class="fit"></div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Size</h3>
+  <div class="group">
+    <ui-select class="mini">
+      <option value="0">Mini</option>
+    </ui-select>
+  </div>
+  <div class="group">
+    <ui-select class="tiny">
+      <option value="0">Tiny</option>
+    </ui-select>
+  </div>
+  <div class="group">
+    <ui-select class="small">
+      <option value="0">Small</option>
+    </ui-select>
+  </div>
+  <div class="group">
+    <ui-select class="medium">
+      <option value="0">Medium</option>
+    </ui-select>
+  </div>
+  <div class="group">
+    <ui-select class="large">
+      <option value="0">Large</option>
+    </ui-select>
+  </div>
+  <div class="group">
+    <ui-select class="big">
+      <option value="0">Big</option>
+    </ui-select>
+  </div>
+  <div class="group">
+    <ui-select class="huge">
+      <option value="0">Huge</option>
+    </ui-select>
+  </div>
+  <div class="group">
+    <ui-select class="massive">
+      <option value="0">Massive</option>
+    </ui-select>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Readonly</h3>
+  <div class="group">
+    <ui-select readonly>
+      <option value="0">Foo</option>
+      <option value="1">Bar</option>
+    </ui-select>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Unnavigable</h3>
+  <div class="group">
+    <ui-select unnavigable>
+      <option value="0">Foo</option>
+      <option value="1">Bar</option>
+    </ui-select>
+  </div>
+</div>

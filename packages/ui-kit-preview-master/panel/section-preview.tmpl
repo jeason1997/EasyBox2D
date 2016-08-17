@@ -1,0 +1,38 @@
+<div class="section">
+  <h3>Standard</h3>
+  <ui-section>
+    <div class="header">Normal</div>
+    <ui-prop name="Name" type="string" value="Foo"></ui-prop>
+    <ui-prop name="ID" type="number" value="0"></ui-prop>
+    <ui-prop name="Info" foldable>
+      <div class="child">
+        <ui-prop name="Foo" type="boolean"></ui-prop>
+        <ui-prop name="Bar" type="boolean"></ui-prop>
+      </div>
+    </ui-prop>
+  </ui-section>
+
+  <ui-section disabled>
+    <div class="header">Disabled</div>
+    <ui-prop name="Name" type="string" value="Foo"></ui-prop>
+    <ui-prop name="ID" type="number" value="0"></ui-prop>
+  </ui-section>
+
+  <ui-section>
+    <div class="header">
+      <ui-checkbox></ui-checkbox>
+      Complex UI
+      <span class="flex-1"></span>
+      <ui-button class="transparent tiny red">Reset</ui-button>
+    </div>
+    <div style="padding: 10px;">
+      <ui-markdown>
+        You can use `npm` to install prebuilt electron binaries:
+
+        ```sh
+        npm install electron-prebuilt --save-dev
+        ```
+      </ui-markdown>
+    </div>
+  </ui-section>
+</div>

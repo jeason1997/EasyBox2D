@@ -1,0 +1,204 @@
+<style>
+  h2 {
+    color: #f90;
+  }
+
+  .wrapper {
+    position: relative;
+    flex: 1;
+    background: #333;
+    margin-bottom: 5px;
+  }
+
+  .wrapper:last-child {
+    margin-bottom: 0px;
+  }
+
+  .wrapper > .box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 3px 10px;
+    box-sizing: border-box;
+    width: 60px;
+    height: 30px;
+    margin: 5px;
+
+    font-weight: bold;
+    background: #666;
+
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .wrapper.horizontal > .box:not(:last-child) {
+    margin-right: 0px;
+  }
+
+  .wrapper.vertical > .box:not(:last-child) {
+    margin-bottom: 0px;
+  }
+</style>
+
+<h2>Horizontal</h2>
+
+<div class="section">
+  <h3>class="layout horizontal"</h3>
+  <div class="wrapper layout horizontal">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+  </div>
+  <div class="wrapper layout horizontal">
+    <div class="box">1</div>
+    <div class="box flex-1">2 (flex-1)</div>
+    <div class="box">3</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>class="layout horizontal ${justified}"</h3>
+  <div class="wrapper layout horizontal justified">
+    <div style="width: auto" class="box">justified</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+  </div>
+  <div class="wrapper layout horizontal around-justified">
+    <div style="width: auto" class="box">around-justified</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+  </div>
+  <div class="wrapper layout horizontal start-justified">
+    <div style="width: auto" class="box">start-justified</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+  </div>
+  <div class="wrapper layout horizontal center-justified">
+    <div style="width: auto" class="box">center-justified</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+  </div>
+  <div class="wrapper layout horizontal end-justified">
+    <div style="width: auto" class="box">end-justified</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>class="layout horizontal ${align-items}"</h3>
+  <div style="height: 80px;" class="wrapper layout horizontal start">
+    <div style="height: 30px;" class="box">start</div>
+    <div style="height: 40px;" class="box">2</div>
+    <div style="height: 50px;" class="box">3</div>
+  </div>
+  <div style="height: 80px;" class="wrapper layout horizontal center">
+    <div style="height: 30px;" class="box">center</div>
+    <div style="height: 40px;" class="box">2</div>
+    <div style="height: 50px;" class="box">3</div>
+  </div>
+  <div style="height: 80px;" class="wrapper layout horizontal end">
+    <div style="height: 30px;" class="box">end</div>
+    <div style="height: 40px;" class="box">2</div>
+    <div style="height: 50px;" class="box">3</div>
+  </div>
+  <div style="height: 80px;" class="wrapper layout horizontal self">
+    <div style="width: auto" class="box self-start">self-start</div>
+    <div style="width: auto" class="box self-center">self-center</div>
+    <div style="width: auto" class="box self-end">self-end</div>
+    <div style="width: auto; height: auto" class="box self-stretch">self-stretch</div>
+  </div>
+</div>
+
+<h2>Vertical</h2>
+
+<div class="section">
+  <h3>class="layout vertical"</h3>
+  <div style="height: 150px;" class="wrapper layout vertical">
+    <div class="box">1</div>
+    <div class="box">2</div>
+    <div class="box">3</div>
+  </div>
+  <div style="height: 150px;" class="wrapper layout vertical">
+    <div class="box">1</div>
+    <div class="box flex-1">2 (flex-1)</div>
+    <div class="box">3</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>class="layout vertical ${justified}"</h3>
+  <div style="height: 150px;" class="wrapper layout vertical justified">
+    <div style="width: 120px" class="box">justified</div>
+    <div style="width: 120px" class="box">2</div>
+    <div style="width: 120px" class="box">3</div>
+  </div>
+  <div style="height: 150px;" class="wrapper layout vertical around-justified">
+    <div style="width: 120px" class="box">around-justified</div>
+    <div style="width: 120px" class="box">2</div>
+    <div style="width: 120px" class="box">3</div>
+  </div>
+  <div style="height: 150px;" class="wrapper layout vertical start-justified">
+    <div style="width: 120px" class="box">start-justified</div>
+    <div style="width: 120px" class="box">2</div>
+    <div style="width: 120px" class="box">3</div>
+  </div>
+  <div style="height: 150px;" class="wrapper layout vertical center-justified">
+    <div style="width: 120px" class="box">center-justified</div>
+    <div style="width: 120px" class="box">2</div>
+    <div style="width: 120px" class="box">3</div>
+  </div>
+  <div style="height: 150px;" class="wrapper layout vertical end-justified">
+    <div style="width: 120px" class="box">end-justified</div>
+    <div style="width: 120px" class="box">2</div>
+    <div style="width: 120px" class="box">3</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>class="layout vertical ${align-items}"</h3>
+  <div class="wrapper layout vertical start">
+    <div style="width: 60px;" class="box">start</div>
+    <div style="width: 70px;" class="box">2</div>
+    <div style="width: 80px;" class="box">3</div>
+  </div>
+  <div class="wrapper layout vertical center">
+    <div style="width: 60px;" class="box">center</div>
+    <div style="width: 70px;" class="box">2</div>
+    <div style="width: 80px;" class="box">3</div>
+  </div>
+  <div class="wrapper layout vertical end">
+    <div style="width: 60px;" class="box">end</div>
+    <div style="width: 70px;" class="box">2</div>
+    <div style="width: 80px;" class="box">3</div>
+  </div>
+  <div class="wrapper layout vertical self">
+    <div style="width: auto" class="box self-start">self-start</div>
+    <div style="width: auto" class="box self-center">self-center</div>
+    <div style="width: auto" class="box self-end">self-end</div>
+    <div style="width: auto" class="box self-stretch">self-stretch</div>
+  </div>
+</div>
+
+<h2>Misc</h2>
+
+<div class="section">
+  <h3>class="flex-1, flex-2, ... flex-12"</h3>
+  <div class="wrapper layout horizontal">
+    <div class="box flex-1">flex-1</div>
+    <div class="box flex-2">flex-2</div>
+    <div class="box flex-3">flex-3</div>
+  </div>
+  <div class="wrapper layout horizontal">
+    <div style="width: auto" class="box flex-none">flex-none</div>
+    <div class="box flex-1">flex-1</div>
+    <div style="width: auto" class="box flex-none">flex-none</div>
+  </div>
+
+  <h3>class="fit"</h3>
+  <div style="width: auto; height: 100px;" class="wrapper">
+    <div style="width: auto; height: auto;" class="box fit">fit</div>
+  </div>
+
+</div>

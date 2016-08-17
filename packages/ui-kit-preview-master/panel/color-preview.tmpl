@@ -1,0 +1,53 @@
+<div class="section">
+  <h3>Standard</h3>
+  <div class="group g-01">
+    <ui-color></ui-color>
+    <span class="text"></span>
+  </div>
+
+  <div class="group g-02">
+    <ui-color value="#09f"></ui-color>
+    <span class="text"></span>
+  </div>
+
+  <div class="group g-03">
+    <ui-color value="rgba(255,0,0,0.8)" disabled></ui-color>
+    <span class="text"></span>
+    <ui-button id="focus" class="mini blue">Focus</ui-button>
+  </div>
+
+  <span id="event">event: ---</span>
+</div>
+
+<div class="section">
+  <h3>State</h3>
+  <div style="position: relative;">
+    <div class="group">
+      <ui-color value="rgba(255,255,255,0.5)" style="width: 200px;"></ui-color>
+    </div>
+    <div class="group">
+      <ui-color value="rgba(255,255,255,0.5)" style="width: 200px;" focused></ui-color>
+    </div>
+    <div class="group">
+      <ui-color value="rgba(255,255,255,0.5)" style="width: 200px;" disabled></ui-color>
+    </div>
+    <div class="fit"></div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Readonly</h3>
+  <div class="group">
+    <ui-color readonly></ui-color>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Unnavigable</h3>
+  <div class="group">
+    <ui-color unnavigable></ui-color>
+  </div>
+  <div class="group">
+    <ui-color unnavigable disabled></ui-color>
+  </div>
+</div>

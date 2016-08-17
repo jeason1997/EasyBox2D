@@ -1,0 +1,26 @@
+{
+  "name": "ui-kit-preview-extra",
+  "version": "1.0.0",
+  "description": "UI Kit Preview Extra",
+  "author": "jwu",
+  "main": "main.js",
+  "main-menu": {
+    "i18n:MAIN_MENU.developer.title/UI-Kit Preview Extra": {
+      "message": "ui-kit-preview-extra:open"
+    }
+  },
+  "panel": {
+    "main": "panel/panel.js",
+    "type": "dockable",
+    "title": "UI-Kit Preview Extra",
+    "width": 800,
+    "height": 600,
+    "messages": [],
+    "profiles": {
+      "local": {
+        "scrollTop": 0,
+        "select": "button"
+      }
+    }
+  }
+}

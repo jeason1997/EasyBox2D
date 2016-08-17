@@ -1,0 +1,81 @@
+<style>
+  .group {
+    margin-top: 15px;
+  }
+</style>
+
+<div class="section">
+  <h3>Standard</h3>
+  <div class="group g-01">
+    <ui-node style="width: 200px;" type="cc.Node" value="090d0OFRNNBL77uJm2aDmFX"></ui-node>
+    <span class="text"></span>
+  </div>
+
+  <div class="group g-02">
+    <ui-node style="width: 200px;" type="cc.Sprite"></ui-node>
+    <span class="text"></span>
+  </div>
+
+  <div class="group g-03">
+    <ui-node style="width: 200px;" dummy empty></ui-node>
+    <span class="text"></span>
+  </div>
+
+  <div class="group g-04">
+    <ui-node style="width: 200px;" type="cc.Sprite" name="buff_jiashuxing_01" dummy></ui-node>
+    <span class="text"></span>
+  </div>
+
+  <div class="group g-05">
+    <ui-node style="width: 200px;" type="cc.Sprite" name="Missing Reference ..." dummy missing></ui-node>
+    <span class="text"></span>
+  </div>
+
+  <div class="group g-06">
+    <ui-node style="width: 200px;" type="cc.Sprite" name="Foobar" dummy disabled></ui-node>
+    <span class="text"></span>
+    <ui-button id="focus" class="mini blue">Focus</ui-button>
+  </div>
+
+  <span id="event">event: ---</span>
+</div>
+
+<div class="section">
+  <h3>State</h3>
+  <div style="position: relative;">
+    <div class="group">
+      <ui-node style="width: 200px;" name="Normal" dummy></ui-node>
+    </div>
+    <div class="group">
+      <ui-node style="width: 200px;" name="Normal" dummy empty></ui-node>
+      <ui-node style="width: 200px;" name="Normal" dummy missing></ui-node>
+    </div>
+
+    <div class="group">
+      <ui-node style="width: 200px;" name="Focused" dummy focused></ui-node>
+    </div>
+    <div class="group">
+      <ui-node style="width: 200px;" name="Focused" dummy empty focused></ui-node>
+      <ui-node style="width: 200px;" name="Focused" dummy missing focused></ui-node>
+    </div>
+
+    <div class="group">
+      <ui-node style="width: 200px;" name="Disabled" dummy disabled></ui-node>
+    </div>
+    <div class="group">
+      <ui-node style="width: 200px;" name="Disabled" dummy empty disabled></ui-node>
+      <ui-node style="width: 200px;" name="Disabled" dummy missing disabled></ui-node>
+    </div>
+    <div class="fit"></div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Highlighted</h3>
+  <div style="position: relative;">
+    <div class="group">
+      <ui-node style="width: 200px;" name="Valid" dummy highlighted></ui-node>
+      <ui-node style="width: 200px;" name="Invalid" dummy highlighted invalid></ui-node>
+    </div>
+  </div>
+</div>

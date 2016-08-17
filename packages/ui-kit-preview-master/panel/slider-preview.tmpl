@@ -1,0 +1,67 @@
+<div class="section">
+  <h3>Standard</h3>
+  <div class="group g-01">
+    <ui-slider value="0.5"></ui-slider>
+    <span class="text"></span>
+  </div>
+
+  <div class="group g-02">
+    <ui-slider value="0.5" disabled></ui-slider>
+    <span class="text"></span>
+    <ui-button id="focus" class="blue mini">Focus</ui-button>
+  </div>
+
+  <span id="event">event: ---</span>
+</div>
+
+<div class="section">
+  <h3>State</h3>
+  <div style="position: relative;">
+    <div class="group">
+      <ui-slider style="width: 200px;" value="0.5" focused></ui-slider>
+      <span class="label">Focused</span>
+    </div>
+    <div class="group">
+      <ui-slider style="width: 200px;" value="0.5" disabled></ui-slider>
+      <span class="label">Disabled</span>
+    </div>
+    <div class="fit"></div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Precision</h3>
+  <div class="group">
+    <ui-slider precision="2" value="0.5" min="0.0" max="1.0"></ui-slider>
+    precision="2" min="0.0" max="1.0"
+  </div>
+  <div class="group">
+    <ui-slider precision="3" value="0.5" min="0.0" max="1.0"></ui-slider>
+    precision="3" min="0.0" max="1.0"
+  </div>
+</div>
+
+<div class="section">
+  <h3>Min Max</h3>
+  <div class="group">
+    <ui-slider value="0.0" min="-1.0" max="1.0"></ui-slider>
+    value="0.0" min="-1.0" max="1.0"
+  </div>
+</div>
+
+<div class="section">
+  <h3>Step</h3>
+  <div class="group">
+    <ui-slider value="0.0" min="-100.0" max="100.0" step="10.0"></ui-slider>
+    value="0.0" min="-100.0" max="100.0" step="10.0"
+  </div>
+</div>
+
+<div class="section">
+  <h3>Readonly</h3>
+  <div style="position: relative;">
+    <div class="group g-03">
+      <ui-slider style="width: 200px;" value="0.5" readonly></ui-slider>
+    </div>
+  </div>
+</div>

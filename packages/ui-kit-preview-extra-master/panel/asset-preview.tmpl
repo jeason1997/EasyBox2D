@@ -1,0 +1,76 @@
+<style>
+  .group {
+    margin-top: 15px;
+  }
+</style>
+
+<div class="section">
+  <h3>Standard</h3>
+  <div class="group g-01">
+    <ui-asset type="texture" value="bbcaf88d-68c8-4bc9-8acf-9c71c05c5acc"></ui-asset>
+    <span class="text"></span>
+  </div>
+
+  <div class="group g-01">
+    <ui-asset dummy empty></ui-asset>
+    <span class="text"></span>
+  </div>
+
+  <div class="group g-02">
+    <ui-asset type="texture" name="buff_jiashuxing_01" dummy></ui-asset>
+    <span class="text"></span>
+  </div>
+
+  <div class="group g-02">
+    <ui-asset type="texture" name="Missing Reference ..." dummy missing></ui-asset>
+    <span class="text"></span>
+  </div>
+
+  <div class="group g-03">
+    <ui-asset type="texture" name="Foobar" dummy disabled></ui-asset>
+    <span class="text"></span>
+    <ui-button id="focus" class="mini blue">Focus</ui-button>
+  </div>
+
+  <span id="event">event: ---</span>
+</div>
+
+<div class="section">
+  <h3>State</h3>
+  <div style="position: relative;">
+    <div class="group">
+      <ui-asset style="width: 200px;" name="Normal" dummy></ui-asset>
+    </div>
+    <div class="group">
+      <ui-asset style="width: 200px;" name="Normal" dummy empty></ui-asset>
+      <ui-asset style="width: 200px;" name="Normal" dummy missing></ui-asset>
+    </div>
+
+    <div class="group">
+      <ui-asset style="width: 200px;" name="Focused" dummy focused></ui-asset>
+    </div>
+    <div class="group">
+      <ui-asset style="width: 200px;" name="Focused" dummy empty focused></ui-asset>
+      <ui-asset style="width: 200px;" name="Focused" dummy missing focused></ui-asset>
+    </div>
+
+    <div class="group">
+      <ui-asset style="width: 200px;" name="Disabled" dummy disabled></ui-asset>
+    </div>
+    <div class="group">
+      <ui-asset style="width: 200px;" name="Disabled" dummy empty disabled></ui-asset>
+      <ui-asset style="width: 200px;" name="Disabled" dummy missing disabled></ui-asset>
+    </div>
+    <div class="fit"></div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Highlighted</h3>
+  <div style="position: relative;">
+    <div class="group">
+      <ui-asset style="width: 200px;" name="Valid" dummy highlighted></ui-asset>
+      <ui-asset style="width: 200px;" name="Invalid" dummy highlighted invalid></ui-asset>
+    </div>
+  </div>
+</div>

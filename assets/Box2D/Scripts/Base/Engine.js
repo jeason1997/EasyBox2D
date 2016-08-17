@@ -76,7 +76,8 @@ window.Engine = cc.Class({
             notify: function () {
                 if (CC_EDITOR) {
                     Editor.Panel.open('box2d');
-                    Editor.Ipc.sendToPanel( 'box2d', 'test', '123');
+                    // send msg to the panel (package name is box2d, function name is 'test')
+                    //Editor.Ipc.sendToPanel( 'box2d', 'test', '123');
                 }
             },
         },
