@@ -1,3 +1,5 @@
+'use strict';
+
 var draw = SVG('drawing')
 
 var group = draw.group()
@@ -21,18 +23,6 @@ var group = draw.group()
 //draw.rect(100,100).animate(3000).fill('#f03').move(100,100)
 
 
-function createCircle(parent, position, radius, lineWidth, lineColor, isFill, fillColor) {
-    root = parent.parent();
-    var circle = root.circle(radius).attr({
-        stroke: lineColor.rgb,
-        'stroke-width': lineWidth,
-        'stroke-opacity': lineColor.a,        
-        fill: fillColor.rgb,
-        'fill-opacity': isFill ? fillColor.a : 0,
-    });
-    circle.center(parent.cx() + position.x, parent.cy() + position.y);
-    return circle;
-};
 
 function Color(r, g, b, a) {
     this.rgb = new SVG.Color({ r: r, g: g, b: b });
@@ -40,15 +30,22 @@ function Color(r, g, b, a) {
     return this;
 }
 
-function Vec2(x, y) {
-    this.x = x;
-    this.y = y;
-    return this;
-}
-
 var c1 = new Color(122, 2, 100, 0.3);
 var c2 = new Color(255, 100, 100, 0.2);
 
-var cir1 = createCircle(group, new Vec2(100, 100), 100, 5, c1, true, c2)
 
-createCircle(cir1, new Vec2(0, 100), 50, 5, c1, true, c2)
+
+
+//var rect = draw.rect(100, 100)
+var cir1 = new Circle(group);
+var rec = new Path(group).color(c1, c2).stytle(2)
+
+SVG.on(window, 'mousemove', function(event) {
+    rec.position(event.x, event.y);
+});
+
+var symbol = draw.symbol()
+symbol.rect(100, 100).fill('#f09')
+
+var use  = draw.use(symbol).move(200, 200)
+

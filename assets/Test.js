@@ -2,7 +2,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        radius: 5,
+        radius: 50,
         fun: {
             default: [],
             type: cc.Component.EventHandler,
