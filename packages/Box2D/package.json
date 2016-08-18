@@ -17,6 +17,7 @@
     "height": 300
   },
   "gizmos": {
-    "CircleShape": "packages://box2d/gizmos/CircleShape.js"
+    "CircleShape": "packages://box2d/gizmos/CircleShape.js",
+    "Test": "packages://box2d/gizmos/TestGizmo.js"
   }
 }

@@ -2,6 +2,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        radius: 5,
         fun: {
             default: [],
             type: cc.Component.EventHandler,
@@ -13,7 +14,7 @@ cc.Class({
         var eventHandler = new cc.Component.EventHandler();
      eventHandler.target = this;
      eventHandler.component = "Test";
-    eventHandler.handler = "操你妈";
+     eventHandler.handler = "操你妈";
  
  
         this.fun.push(eventHandler);
@@ -34,9 +35,4 @@ cc.Class({
     test: function () {
         cc.Component.EventHandler.emitEvents(this.fun, "我操你妈");
     },
-
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
 });
