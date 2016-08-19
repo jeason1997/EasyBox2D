@@ -74,5 +74,9 @@ module.exports = {
         generateEnum(arg, arg2) {
             saveFile(generateEnum(arg2));
         },
+        reload() {
+            Editor.log('Reload Package.');
+            Editor.Package.reload(Editor.Package.packagePath('box2d'));
+        }
     },
 };

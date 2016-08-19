@@ -1,185 +1,116 @@
 'use strict';
 
-'use strict';
-
-class Shape {
-
-    constructor(parent) {
-        this.parent = parent;
-        if (parent.root !== undefined) {
-            this.parent = parent.root;
-            parent.children.push(this);
-        }
-        this.children = new Array();
-        this.root = this.parent.group();
-        this._position = [0, 0];
-    }
-
-    position(x, y) {
-        this._position = [x, y];
-        this.root.move(x, y);
-        return this;
-    }
-
-    rotate(angle) {
-        this.shape.rotate(angle);
-        this.children.forEach(function (child) {
-            child.rotate(angle);
-        }, this);
-        return this;
-    }
-
-    scale(s) {
-        this.root.scale(s);
-        return this;
-    }
-
-    color(lineColor, fillColor) {
-        this.shape.attr({
-            stroke: lineColor.rgb,
-            'stroke-opacity': lineColor.a,
-        });
-        if (fillColor !== undefined) {
-            this.shape.attr({
-                fill: fillColor.rgb,
-                'fill-opacity': fillColor.a,
-            });
-        }
-        return this;
-    }
-
-    stytle(lineWidth) {
-        this.shape.attr({
-            'stroke-width': lineWidth,
-            'cursor': 'pointer',
-        });
-        return this;
-    }
-
-    onClick(callback) {
-        this.shape.on('click', callback.bind(this));
-        return this;
-    }
-
-    onMousedown(callback) {
-        this.shape.on('mousedown', callback.bind(this));
-        return this;
-    }
-
-    onMouseup(callback) {
-        this.shape.on('mouseup', callback.bind(this));
-        return this;
-    }
-
-    onMousemove(callback) {
-        this.shape.on('mousemove', callback.bind(this));
-        return this;
-    }
-
-    onMouseover(callback) {
-        this.shape.on('mouseover', callback.bind(this));
-        return this;
-    }
-
-    onMouseout(callback) {
-        this.shape.on('mouseout', callback.bind(this));
-        return this;
-    }
-}
-
-class Circle extends Shape {
-
-    constructor(parent) {
-        super(parent);
-
-        this._radius = 100;
-        this.shape = this.root.circle(this._radius);
-    }
-
-    radius(radius) {
-        this._radius = radius;
-        this.shape.radius(radius);
-        return this;
-    }
-}
-
-class Rect extends Shape {
-
-    constructor(parent) {
-        super(parent);
-
-        this._size = [100, 100];
-        this.shape = this.root.rect(this._size[0], this._size[1]);
-    }
-
-    size(w, h) {
-        this._size = [w, h];
-        this.shape.width(w);
-        this.shape.height(h);
-        return this;
-    }
-}
-
-class Polygon extends Shape {
-
-    constructor(parent, close) {
-        super(parent);
-
-        this._vectors = '0,0 -50,50 50,50';
-        this.shape = close ? this.root.polygon(this._vectors) : this.root.polyline(this._vectors).fill('none').stroke({ width: 1 });
-    }
-
-    vectors(v) {
-        this._vectors = v;
-        this.shape.plot(v);
-        return this;
-    }
-}
-
-class Path extends Shape {
-
-    constructor(parent) {
-        super(parent);
-
-        this._path = 'M100,200L300,400';
-        this.shape = this.root.path(this._path);
-    }
-
-    path(v) {
-        this._path = v;
-        this.shape.plot(v);
-        return this;
-    }
-}
-
+let Circle = require('G:/EasyBox2D/packages/Box2D/gizmos/GizmoTool');
 
 class TestGizmo extends Editor.Gizmo {
-    init() {
-        // 初始化一些参数
-    }
 
     onCreateRoot() {
-        // 创建 svg 根节点的回调，可以在这里创建你的 svg 工具
-        // this._root 可以获取到 Editor.Gizmo 创建的 svg 根节点
 
-        // 实例：
+        this.bigCircle = new Circle(this._root.group())
+            .color('rgba(0,128,255,1)', 'rgba(0,128,255,0.2)')
+            .stytle(2, null, 'move')
+            ;
 
-        // 创建一个 svg 工具
-        // group 函数文档 : http://documentup.com/wout/svg.js#groups
-        this._tool = this._root.group();
+        this.smallCircle = new Circle(this.bigCircle)
+            .color('rgba(0,128,255,1)', 'rgba(0,128,255,1)')
+            .stytle(1, null, 'pointer')
+            .radius(5)
+            ;
 
-        // 画一个的圆
-        // circle 函数文档 : http://documentup.com/wout/svg.js#circle
-        let circle = this._tool.circle();
+        Editor.GizmosUtils.addMoveHandles(this.bigCircle.shape, this.move());
+        Editor.GizmosUtils.addMoveHandles(this.smallCircle.shape, this.resize());
+    }
 
-        // 为 tool 定义一个绘画函数，可以为其他名字
-        this._tool.plot = (radius, position) => {
-            this._tool.move(position.x, position.y);
-            circle.radius(radius);
+    move() {
+        return {
+            start: function (x, y, event) {
+                this.startRadius = this.target.radius;
+                this.pressx = x;
+                this.pressy = y;
+                this.updated = false;
+            }.bind(this),
+            update: function (dx, dy, event) {
+                if (dx === 0 && dy === 0) {
+                    return;
+                }
+                this.updated = true;
+
+                // 获取 gizmo 依附的节点
+                let node = this.node;
+
+                // 记录节点信息的 undo 信息，注意参数为节点的 uuid
+                _Scene.Undo.recordNode(node.uuid);
+
+                // 获取 svg view 坐标系下点
+                let x = this.pressx + dx, y = this.pressy + dy;
+                // 获取节点世界坐标系下点
+                let pos = this._view.pixelToWorld(cc.v2(x, y));
+
+                this.bigCircle.position(pos.x, pos.y);
+                
+                // 更新 gizmo view 
+                this._view.repaintHost();
+                
+            }.bind(this),
+            end: function (event) {
+                // 判断是否有操作过 gizmo, 没有则跳过处理
+                if (this.updated) {
+                    // 如果 gizmo 有修改需要进入 animation 编辑的属性，需要调用此接口来更新数据
+                    // _Scene.AnimUtils.recordNodeChanged(this.node);
+
+                    // 推送修改到 undo 下，结束 undo
+                    _Scene.Undo.commit();
+                }
+            }.bind(this)
         };
+    }
 
-        this._tool.c = new Circle(this._tool);
-        this._tool.c.shape.fill( { color: 'rgba(0,128,255,0.2)' } );
+    resize() {
+        return {
+            start: function (x, y, event) {
+                this.startRadius = this.target.radius;
+                this.pressx = x;
+                this.pressy = y;
+                this.updated = false;
+            }.bind(this),
+            update: function (dx, dy, event) {
+                if (dx === 0 && dy === 0) {
+                    return;
+                }
+                this.updated = true;
+
+                // 获取 gizmo 依附的节点
+                let node = this.node;
+
+                // 记录节点信息的 undo 信息，注意参数为节点的 uuid
+                _Scene.Undo.recordNode(node.uuid);
+
+                // 获取 svg view 坐标系下点
+                let x = this.pressx + dx, y = this.pressy + dy;
+                // 获取节点世界坐标系下点
+                let pos = this._view.pixelToWorld(cc.v2(x, y));
+                // 转换坐标点到节点下
+                pos = node.convertToNodeSpaceAR(pos);
+                // 计算 radius
+                let radius = pos.mag();
+                // js 在做一些计算后会出现小数位过长的情况， Editor.Math.toPrecision 会帮助做一些小数位的截取
+                let minDifference = Editor.Math.numOfDecimalsF(1.0 / this._view.scale);
+                this.target.radius = Editor.Math.toPrecision(radius, minDifference);
+
+                // 更新 gizmo view 
+                this._view.repaintHost();
+            }.bind(this),
+            end: function (event) {
+                // 判断是否有操作过 gizmo, 没有则跳过处理
+                if (this.updated) {
+                    // 如果 gizmo 有修改需要进入 animation 编辑的属性，需要调用此接口来更新数据
+                    // _Scene.AnimUtils.recordNodeChanged(this.node);
+
+                    // 推送修改到 undo 下，结束 undo
+                    _Scene.Undo.commit();
+                }
+            }.bind(this)
+        };
     }
 
     onUpdate() {
@@ -210,9 +141,9 @@ class TestGizmo extends Editor.Gizmo {
         worldRadius = Editor.GizmosUtils.snapPixel(worldRadius);
 
         // 移动 svg 工具到坐标
-        this._tool.plot(worldRadius, p);
-
-        this._tool.position(p)
+        this.bigCircle.radius(worldRadius);
+        this.bigCircle.position(viewPosition.x, viewPosition.y);
+        this.smallCircle.position(worldRadius, 0);
     }
 
     // 如果需要自定义 Gizmo 显示的时机，重写 visible 函数即可

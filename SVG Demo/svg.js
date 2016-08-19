@@ -24,28 +24,59 @@ var group = draw.group()
 
 
 
-function Color(r, g, b, a) {
-    this.rgb = new SVG.Color({ r: r, g: g, b: b });
-    this.a = a;
-    return this;
-}
-
-var c1 = new Color(122, 2, 100, 0.3);
-var c2 = new Color(255, 100, 100, 0.2);
+//var cir1 = new Circle(group).color('rgba(0,128,255,1)', 'rgba(0,128,255,0.2)').stytle(5, 'stroke', 'move')
+let cir = new Circle(group).color('rgba(0,128,255,1)', 'rgba(0,128,255,0.2)').stytle(2, null, 'move').radius(50).position(100, 100)
+let cir2 = new Circle(cir).color('rgba(0,128,255,1)', 'rgba(0,128,255,1)').radius(5).position(cir._radius, 0).stytle(1, null, 'pointer')
 
 
+let rect = new Rect(group).color('rgba(0,128,255,1)', 'rgba(0,128,255,0.2)').stytle(2, null, 'move').position(200, 200)
+let p1 = new Circle(rect).color('rgba(0,128,255,1)', 'rgba(0,128,255,1)').radius(5).position(rect._size[0] / 2, rect._size[1] / 2).stytle(1, null, 'pointer')
+let p2 = new Circle(rect).color('rgba(0,128,255,1)', 'rgba(0,128,255,1)').radius(5).position(-rect._size[0] / 2, rect._size[1] / 2).stytle(1, null, 'pointer')
+let p3 = new Circle(rect).color('rgba(0,128,255,1)', 'rgba(0,128,255,1)').radius(5).position(rect._size[0] / 2, -rect._size[1] / 2).stytle(1, null, 'pointer')
+let p4 = new Circle(rect).color('rgba(0,128,255,1)', 'rgba(0,128,255,1)').radius(5).position(-rect._size[0] / 2, -rect._size[1] / 2).stytle(1, null, 'pointer')
 
 
-//var rect = draw.rect(100, 100)
-var cir1 = new Circle(group);
-var rec = new Path(group).color(c1, c2).stytle(2)
 
-SVG.on(window, 'mousemove', function(event) {
-    rec.position(event.x, event.y);
+
+
+//cir1.shape.fill('img.jpg');
+let move = false;
+let resize = false;
+let lx = 0;
+let ly = 0;
+SVG.on(window, 'mousemove', function (e) {
+
+    if (move) {
+        cir.position(cir._position[0] + e.x - lx, cir._position[1] + e.y - ly)
+
+    }
+
+    if (resize) {
+        cir.radius(cir._radius + e.x - lx)
+        cir2.position(cir._radius, 0)
+    }
+
+    lx = e.x;
+    ly = e.y;
 });
 
-var symbol = draw.symbol()
-symbol.rect(100, 100).fill('#f09')
+SVG.on(window, 'mouseup', function (e) {
+    move = false;
+    resize = false;
+});
 
-var use  = draw.use(symbol).move(200, 200)
+cir.onMousedown(function (e) {
+    move = true;
+    lx = e.x;
+    ly = e.y;
+})
 
+cir2.onMousedown(function (e) {
+    lx = e.x;
+    resize = true;
+})
+
+
+function () {
+
+}

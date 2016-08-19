@@ -20,13 +20,8 @@ window.CircleShape = cc.Class({
 
     properties: {
         editing: false,
+        
         _radius: 50,
-        /**
-         * !#en Circle radius
-         * !#zh 圆形半径
-         * @property radius
-         * @type {Number}
-         */
         radius: {
             get: function () {
                 return this._radius;
@@ -36,8 +31,15 @@ window.CircleShape = cc.Class({
             }
         },
         
-        
-        
+        _offset: cc.Vec2.ZERO,
+        offset: {
+            get: function() {
+                return this._offset;
+            },
+            set: function (value) {
+                this._offset = value;
+            }
+        },
         
         shapeType: {
             default: ShapeType.CIRCLE,
@@ -60,7 +62,7 @@ window.CircleShape = cc.Class({
                 this.updateDebugDraw();
             }
         },
-        offset: {
+        offset2: {
             default: new cc.Vec2(0, 0),
             displayName: 'i18n:Box2D.Shape.CircleShape.offset',
             tooltip: 'i18n:Box2D.Shape.CircleShape.offset_tooltip',

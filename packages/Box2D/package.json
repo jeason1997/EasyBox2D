@@ -7,6 +7,10 @@
   "main-menu": {
     "i18n:box2d.Editor.menu_ingame": {
       "message": "box2d:open"
+    },
+    "开发工具/重载Box2D插件": {
+      "message": "box2d:reload",
+      "accelerator": "Shift+R"
     }
   },
   "panel": {

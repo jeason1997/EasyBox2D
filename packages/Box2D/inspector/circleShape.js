@@ -5,10 +5,11 @@ Vue.component('circleShape', {
         <img src={{imgPath}} width="294" height="166" />
     </a>
     <p>
-        <ui-button class="red" @confirm="_onBtnPress">Editor Shape</ui-button>        
+        <ui-button class={{btnColor}} v-bind="styleObject" @confirm="_onBtnPress">Editor Shape</ui-button>        
     </p>
     <ui-label class="orange circle">属性</ui-label>
     <ui-section class="big" text="Box2D">
+        <ui-prop v-prop="target.editing"></ui-prop>    
         <ui-prop v-prop="target.shapeType"></ui-prop>
         <ui-prop v-prop="target.sameAsNode"></ui-prop>
         <div v-if="target.sameAsNode.value === false">
@@ -21,6 +22,10 @@ Vue.component('circleShape', {
     data: function () {
         return {
             imgPath: Editor.url('packages://box2d/res/inspector/circleShape.gif'),
+            styleObject: {
+                pressed: 'true',
+            },
+            btnColor: 'red',
         }
     },
 
@@ -33,8 +38,9 @@ Vue.component('circleShape', {
 
     methods: {
         T: Editor.T,
-        _onBtnPress: function (t) {
-            cc.log(t);
+        _onBtnPress: function (event) {
+            let btn = event.currentTarget;
+            btn.pressed = true;
         },
     }
 });

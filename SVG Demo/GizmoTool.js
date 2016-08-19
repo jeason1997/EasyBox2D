@@ -4,13 +4,19 @@ class Shape {
 
     constructor(parent) {
         this.parent = parent;
+        this.children = new Array();
+        this.isRoot = false;
+        this._position = [0, 0];
+        this._scale = 1;        
+
         if (parent.root !== undefined) {
-            this.parent = parent.root;
+            this.root = parent.root.group();
             parent.children.push(this);
         }
-        this.children = new Array();
-        this.root = this.parent.group();
-        this._position = [0, 0];
+        else {
+            this.isRoot = true;
+            this.root = parent.group();
+        }
     }
 
     position(x, y) {
@@ -28,30 +34,37 @@ class Shape {
     }
 
     scale(s) {
+        this._scale = s;
         this.root.scale(s);
         return this;
     }
 
     color(lineColor, fillColor) {
-        this.shape.attr({
-            stroke: lineColor.rgb,
-            'stroke-opacity': lineColor.a,
-        });
+        this.shape.stroke({ color: lineColor })
         if (fillColor !== undefined) {
-            this.shape.attr({
-                fill: fillColor.rgb,
-                'fill-opacity': fillColor.a,
-            });
-        }
+            this.shape.fill({ color: fillColor })
+        };
         return this;
     }
 
-    stytle(lineWidth) {
+    stytle(lineWidth, pointerArea, cursorType) {
         this.shape.attr({
             'stroke-width': lineWidth,
-            'cursor': 'pointer',
+            'pointer-events': pointerArea,
+            'cursor': cursorType,
         });
         return this;
+    }
+
+    _resize(anchor) {
+        if (!this.isRoot)
+            this.shape.center(this.parent.shape.cx(), this.parent.shape.cy());
+        else
+            this.shape.center(0, 0);
+
+        this.children.forEach(function (child) {
+            child.shape.center(child.parent.shape.cx(), child.parent.shape.cy());
+        }, this);
     }
 
     onClick(callback) {
@@ -97,6 +110,7 @@ class Circle extends Shape {
     radius(radius) {
         this._radius = radius;
         this.shape.radius(radius);
+        this._resize();
         return this;
     }
 }
@@ -114,6 +128,7 @@ class Rect extends Shape {
         this._size = [w, h];
         this.shape.width(w);
         this.shape.height(h);
+        this._resize();
         return this;
     }
 }
@@ -130,6 +145,7 @@ class Polygon extends Shape {
     vectors(v) {
         this._vectors = v;
         this.shape.plot(v);
+        this._resize();
         return this;
     }
 }
@@ -146,6 +162,7 @@ class Path extends Shape {
     path(v) {
         this._path = v;
         this.shape.plot(v);
+        this._resize();
         return this;
     }
 }
