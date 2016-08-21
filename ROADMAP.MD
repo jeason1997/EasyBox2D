@@ -2,6 +2,7 @@
 
  * `（临时增加）`修改碰撞监听函数为Creator新版自带的EventHandle
  * `（进行中）`修改EdgeShape在Editor下的LinePrefab添加方式为通过uuid加载
+ * 模仿Uniyt3D的物理材质这一属性，可以将物理属性导出为资源，供多个刚体共同引用
  * 添加EdgeShape以及PolygonShape的DebugDraw
  * 增加一个Node上可以添加多个Shape组合的属性（初步实现）
  * Edge以及Polygon增加可以通过缩放Node而进行缩放的特性

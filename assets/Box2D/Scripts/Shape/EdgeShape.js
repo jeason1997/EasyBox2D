@@ -7,7 +7,6 @@
  *************************************************/
 
 require('Shape');
-require('EdgeDraw');
 
 window.EdgeShape = cc.Class({
 
@@ -15,7 +14,6 @@ window.EdgeShape = cc.Class({
 
     editor: {
         menu: 'i18n:Box2D.Shape.Box2D_EdgeShape.menu',
-        executeInEditMode: false,
     },
 
     properties: {
@@ -25,26 +23,24 @@ window.EdgeShape = cc.Class({
             readonly: true,
             visible: false,
         },
-        close: {
-            default: false,
-        },
-        removePathInGame: {
-            default: false,
-        },
+        
+        editing: false,
+        
         vertexes: {
             default: [],
-            type: cc.Node,
-            notify: function () {
-                if (CC_EIDTOR)
-                    this.vertexes = EdgeDraw.updateEdge(this);
-            },
+            type: [cc.Vec2],
+            visible: true,
         },
-    },
-
-    onLoad: function () {
-        if (this.removePathInGame) {
-            this.node.removeAllChildren();
-        }
+        
+        _offset: cc.Vec2.ZERO,
+        offset: {
+            get: function() {
+                return this._offset;
+            },
+            set: function (value) {
+                this._offset = value;
+            }
+        },
     },
 
     getShape: function () {
@@ -52,8 +48,7 @@ window.EdgeShape = cc.Class({
         var vets = new Array(this.vertexes.length);
 
         for (var i = 0; i < this.vertexes.length; ++i) {
-            var pos = this.vertexes[i].position;
-            var v = new b2Vec2(pos.x / PTM_RATIO, pos.y / PTM_RATIO);
+            var v = new b2Vec2(this.vertexes[i].x / PTM_RATIO, this.vertexes[i].y / PTM_RATIO);
             vets[i] = v;
         }
 

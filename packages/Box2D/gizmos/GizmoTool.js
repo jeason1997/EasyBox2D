@@ -7,7 +7,8 @@ class Shape {
         this.children = new Array();
         this.isRoot = false;
         this._position = [0, 0];
-        this._scale = 1;        
+        this._scale = 1;
+        this._visible = true;
 
         if (parent.root !== undefined) {
             this.root = parent.root.group();
@@ -40,19 +41,32 @@ class Shape {
     }
 
     color(lineColor, fillColor) {
-        this.shape.stroke({ color: lineColor })
-        if (fillColor !== undefined) {
-            this.shape.fill({ color: fillColor })
-        };
+        this.shape.stroke({ color: lineColor });
+        this.shape.fill(fillColor === undefined ? 'none' : { color: fillColor });
         return this;
     }
 
-    stytle(lineWidth, pointerArea, cursorType) {
+    lineStytle(lineWidth) {
         this.shape.attr({
             'stroke-width': lineWidth,
-            'pointer-events': pointerArea,
-            'cursor': cursorType,
         });
+        return this;
+    }
+
+    cursorStytle(cursorType, pointerArea) {
+        this.shape.attr({
+            'cursor': cursorType,            
+            'pointer-events': pointerArea,
+        });
+        return this;
+    }
+
+    visible(v) {
+        this._visible = v;
+        if (v)
+            this.shape.show();
+        else
+            this.shape.hide();
         return this;
     }
 
@@ -138,13 +152,28 @@ class Polygon extends Shape {
     constructor(parent, close) {
         super(parent);
 
-        this._vectors = '0,0 -50,50 50,50';
-        this.shape = close ? this.root.polygon(this._vectors) : this.root.polyline(this._vectors).fill('none').stroke({ width: 1 });
+        this._vertexes = '0,0 -50,50 50,50';
+        this.shape = close ? this.root.polygon(this._vertexes) : this.root.polyline(this._vertexes).fill('none').stroke({ width: 1 });
     }
 
-    vectors(v) {
-        this._vectors = v;
-        this.shape.plot(v);
+    _resize(anchor) {
+        //if (!this.isRoot)
+        //    this.shape.center(this.parent.shape.cx(), this.parent.shape.cy());
+        //else
+        //    this.shape.center(0, 0);
+
+        this.children.forEach(function (child) {
+            child.shape.center(child.parent.shape.cx(), child.parent.shape.cy());
+        }, this);
+    }
+
+    vertexes(vs) {
+        let _v = '';
+        vs.forEach(function(v) {
+            _v += v.x + ',' + v.y + ' ';
+        }, this);
+        this._vertexes = _v;
+        this.shape.plot(_v);
         this._resize();
         return this;
     }
@@ -167,4 +196,8 @@ class Path extends Shape {
     }
 }
 
-module.exports = Circle;
+module.exports.Circle = Circle;
+module.exports.Rect = Rect;
+module.exports.Polygon = Polygon;
+module.exports.Path = Path;
+
