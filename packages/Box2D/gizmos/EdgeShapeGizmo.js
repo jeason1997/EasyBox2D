@@ -21,7 +21,7 @@ class EdgeShapeGizmo extends Editor.Gizmo {
                 .cursorStytle('pointer')
                 .radius(3)
                 ;
-            Editor.GizmosUtils.addMoveHandles(this.points[i].shape, this.moveVertexe(i));
+            Editor.GizmosUtils.addMoveHandles(this.points[i].shape, this.moveOrDeleteVertexe(i));
             this.points[i].visible(false);
         }
 
@@ -30,12 +30,24 @@ class EdgeShapeGizmo extends Editor.Gizmo {
         this._targetEditing = !this.target.editing;
     }
 
-    moveVertexe(index) {
+    moveOrDeleteVertexe(index) {
         return {
             start: function (x, y, event) {
                 this.pressx = x;
                 this.pressy = y;
                 this.updated = false;
+
+                let deleteKeyDown = event.ctrlKey || event.metaKey;
+                if (deleteKeyDown) {
+                    _Scene.Undo.recordNode(this.node.uuid);
+
+                    let vertexes = this.target.vertexes;
+                    Editor.log(index + ' : ' + vertexes[index])
+                    vertexes.splice(index, 1);
+                    this.points.splice(index, 1);
+
+                    return;
+                }
             }.bind(this),
 
             update: function (dx, dy, event) {
@@ -43,6 +55,11 @@ class EdgeShapeGizmo extends Editor.Gizmo {
                     return;
                 }
                 this.updated = true;
+
+                let deleteKeyDown = event.ctrlKey || event.metaKey;
+                if (deleteKeyDown) {
+                    return;
+                }
 
                 let node = this.node;
                 _Scene.Undo.recordNode(node.uuid);
