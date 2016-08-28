@@ -23,16 +23,15 @@ window.ShapeType = cc.Enum({
 window.Shape = cc.Class({
     
     extends: cc.Component,
-    
-    editor: {
-        requireComponent: Body,
-    },
 
     properties: {
-        ShapeData: {
-            default: null,
-            visible: false,
+        
+        editing: {
+            default: false,
+            editorOnly: true,
+            serializable: false,
         },
+        
         body: {
             default: null,
             type: Body,

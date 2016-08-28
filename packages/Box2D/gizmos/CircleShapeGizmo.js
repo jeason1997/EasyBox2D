@@ -8,7 +8,7 @@ class CircleShapeGizmo extends Editor.Gizmo {
     onCreateRoot() {
 
         this.bigCircle = new Circle(this._root.group())
-            .color('rgba(0,128,255,1)')
+            .color('rgba(0,128,255,1)', null)
             .lineStytle(2)
             .cursorStytle('move')
             ;
@@ -137,7 +137,7 @@ class CircleShapeGizmo extends Editor.Gizmo {
             return;
         }
 
-        this.bigCircle.color('rgba(0,128,255,1)');
+        this.bigCircle.color('rgba(0,128,255,1)', null);
         this.smallCircle.visible(false);
 
         this._targetEditing = false;

@@ -5,18 +5,18 @@ let Circle = GizmoTool.Circle;
 let Polygon = GizmoTool.Polygon;
 let Line = GizmoTool.Line;
 
-class EdgeShapeGizmo extends Editor.Gizmo {
+class PolygonShapeGizmo extends Editor.Gizmo {
 
     onCreateRoot() {
 
-        this.fillArea = new Polygon(this._root.group(), false)
+        this.fillArea = new Polygon(this._root.group(), true)
             .color(null, 'rgba(0,128,255,0.2)')
             .cursorStytle('move', 'fill')
             ;
 
 
         this.lines = [];
-        for (let i = 0; i < this.target.vertexes.length - 1; ++i) {
+        for (let i = 0; i < this.target.vertexes.length; ++i) {
             this.lines[i] = new Line(this._root.group())
                 .color('rgba(0,128,255,1)')
                 .lineStytle(2)
@@ -33,7 +33,6 @@ class EdgeShapeGizmo extends Editor.Gizmo {
                 .radius(3)
                 ;
             Editor.GizmosUtils.addMoveHandles(this.points[i].shape, this.moveOrDeleteVertexe());
-            this.points[i].visible(false);
         }
 
 
@@ -174,19 +173,17 @@ class EdgeShapeGizmo extends Editor.Gizmo {
 
         let vertexes = [];
         for (let i = 0; i < this.target.vertexes.length; ++i) {
-            vertexes[i + 1] = Editor.GizmosUtils.snapPixelWihVec2(
+            vertexes[i] = Editor.GizmosUtils.snapPixelWihVec2(
                 this._view.worldToPixel(node.convertToWorldSpaceAR(this.target.vertexes[i].add(this.target.offset))));
         }
-        // 头尾添加两个点，是为了让填充区域构成一个多边形
-        vertexes[0] = new cc.Vec2(vertexes[1].x, cc.view.getCanvasSize().height);
-        vertexes[vertexes.length] = new cc.Vec2(vertexes[vertexes.length - 1].x, cc.view.getCanvasSize().height);
 
         this.fillArea.vertexes(vertexes);
-        for (let i = 0; i < this.lines.length; ++i) {
-            this.lines[i].line(vertexes[i + 1], vertexes[i + 2]);
+        for (let i = 0; i < this.lines.length - 1; ++i) {
+            this.lines[i].line(vertexes[i], vertexes[i + 1]);
         }
+        this.lines[this.lines.length - 1].line(vertexes[0], vertexes[vertexes.length - 1]);        
         for (let i = 0; i < this.points.length; ++i) {
-            this.points[i].position(vertexes[i + 1].x, vertexes[i + 1].y);
+            this.points[i].position(vertexes[i].x, vertexes[i].y);
         }
     }
 
@@ -221,4 +218,4 @@ class EdgeShapeGizmo extends Editor.Gizmo {
     }
 }
 
-module.exports = EdgeShapeGizmo;
+module.exports = PolygonShapeGizmo;

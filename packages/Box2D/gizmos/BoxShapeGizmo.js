@@ -9,7 +9,7 @@ class BoxShapeGizmo extends Editor.Gizmo {
     onCreateRoot() {
 
         this.box = new Rect(this._root.group())
-            .color('rgba(0,128,255,1)')
+            .color('rgba(0,128,255,1)', null)
             .lineStytle(2)
             .cursorStytle('move')
             ;
@@ -146,7 +146,7 @@ class BoxShapeGizmo extends Editor.Gizmo {
 
         this.box.size(w, h);
         this.box.position(pos.x, pos.y);
-        this.box.rotate(this.target.node.rotation);
+        //this.box.rotate(this.target.node.rotation);
         this.lu.position(-w / 2, h / 2);
         this.ld.position(-w / 2, -h / 2);
         this.ru.position(w / 2, h / 2);
@@ -172,7 +172,7 @@ class BoxShapeGizmo extends Editor.Gizmo {
             return;
         }
 
-        this.box.color('rgba(0,128,255,1)');
+        this.box.color('rgba(0,128,255,1)', null);
         this.lu.visible(false);
         this.ld.visible(false);
         this.ru.visible(false);

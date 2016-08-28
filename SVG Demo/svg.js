@@ -22,7 +22,15 @@ var group = draw.group()
 
 //draw.rect(100,100).animate(3000).fill('#f03').move(100,100)
 //var rect = draw.rect(100, 100)
-var rect = new Polygon(group, false)
-    .vertexes([[0, 100], [100, 0], [200, 100]])
+var rect = new Rect(group)
+    .color(null, 'rgba(200, 100, 100, 1)')
+    .position(100, 100);
+
+var child = new Rect(rect)
+    .color(null, 'rgba(100, 100, 100, 0.5)')
+    .position(50, 50)
+    .size(40, 80);
+
+
 
 //var cir1 = new Circle(group).color('rgba(0,128,255,1)', 'rgba(0,128,255,0.2)').stytle(5, 'stroke', 'move')

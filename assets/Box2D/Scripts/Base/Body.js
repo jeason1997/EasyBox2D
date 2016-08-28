@@ -134,10 +134,40 @@ window.Body = cc.Class({
 
     createBody: function() {
         // Fixture
-        var fixtureList = new Array(0);
+        let fixtureList = new Array(0);
 
         // Shape
-        var shape = this.getComponent(Shape);
+        let shapes = this.getComponentsInChildren(Shape);
+        if (shapes.length <= 0) {
+            cc.error('Body mush take at least one shape.');
+            this.destroy();
+            return;
+        }
+        
+        for (let i = 0; i < shapes.length; ++i) {
+            shapes[i].body = this;
+            let fixDef = new b2FixtureDef();
+                fixDef.density = this.density;
+                fixDef.friction = this.friction;
+                fixDef.restitution = this.restitution;
+                fixDef.isSensor = this.isSensor;
+
+                let maskBits = 0;
+                for (let i = 1; i < this.CollisionWith.length && i <= 16; ++i) {
+                    if (this.CollisionWith[i])
+                        maskBits += Math.pow(2, i - 1);
+                }
+                if (maskBits === 0) maskBits = 65535;
+                let filter = new b2FilterData();
+                filter.categoryBits = this.Category;
+                filter.maskBits = maskBits;
+                fixDef.filter = filter;
+
+                fixDef.shape = shapes[i].getShape();
+                fixtureList.push(fixDef);
+        }
+        
+        /*
         if (shape) {
             shape.body = this;
             if (shape.shapeType === ShapeType.EDGE) {
@@ -163,32 +193,9 @@ window.Body = cc.Class({
                     fixDef.shape = shapes[i];
                     fixtureList.push(fixDef);
                 }
-            } else {
-                var fixDef = new b2FixtureDef();
-                fixDef.density = this.density;
-                fixDef.friction = this.friction;
-                fixDef.restitution = this.restitution;
-                fixDef.isSensor = this.isSensor;
-
-                var maskBits = 0;
-                for (var i = 1; i < this.CollisionWith.length && i <= 16; ++i) {
-                    if (this.CollisionWith[i])
-                        maskBits += Math.pow(2, i - 1);
-                }
-                if (maskBits === 0) maskBits = 65535;
-                var filter = new b2FilterData();
-                filter.categoryBits = this.Category;
-                filter.maskBits = maskBits;
-                fixDef.filter = filter;
-
-                fixDef.shape = shape.getShape();
-                fixtureList.push(fixDef);
             }
-        } else {
-            cc.error('Body mush take at least one shape.');
-            this.destroy();
-            return;
         }
+        */
 
         // BodyDef
         var bodyDef = new b2BodyDef();

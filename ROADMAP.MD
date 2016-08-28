@@ -1,18 +1,19 @@
 #项目排期（按优先级排序）
 
- * `（临时增加）`修改碰撞监听函数为Creator新版自带的EventHandle
- * `（进行中）`修改EdgeShape在Editor下的LinePrefab添加方式为通过uuid加载
+ * 为Joint添加DebugDraw
+ * 修改碰撞监听函数为Creator新版自带的EventHandle
+ * `BUG`获取Shape时，现在可以获取多个Shape了，但EdgeShape还不能正常获得
+ * 一个Node身上只能有一个Body组件，这样可以避免许多问题，U3D也是这样做的。(而且Body应该放在最上，U3D如果上层还有Collider，会出错，我们直接无视上层Shape)
+ * 调整BoxShape的Gizmo为拖动顶点时，会根据当前长度动态改变当前位置（类似U3D的那种）
  * 模仿Uniyt3D的物理材质这一属性，可以将物理属性导出为资源，供多个刚体共同引用
- * 添加EdgeShape以及PolygonShape的DebugDraw
- * 增加一个Node上可以添加多个Shape组合的属性（初步实现）
- * Edge以及Polygon增加可以通过缩放Node而进行缩放的特性
- * 添加EdgeShape以及PolygonShape顶点删除功能
- * 添加贝塞尔多曲线编辑Edge以及Polygon
- * 修复当父节点有缩放后，再旋转，子对象的图形会出问题（修改Scale为getWorldOrientedBounds，官方说Scale不准）
- * 在上一步完成后，修复DebugDraw时，如果将刚体放到Canvas下，会出现比例不对的BUG
+ * （大更新）将直接从Shape处获取属性改为跟Node的Transform相关，这样就可以在Node Scale后，Shape仍然正确（像U3D，Go缩放后，Colliser也缩放，但Collider的Radius仍然没变）
+ * 继上：缩放Node也会缩放Edeg跟Polygon的顶点以及Circle的半径等
+ * `BUG`由于获取Shape只是获取它的offer,所以如果Shape在子物体身上又没offer，位置会不对
+ * `优化`添加Shape时，模式大小应该跟Node对应上，如果默认Node size为0，则赋予Shape大小默认值
+ * 添加贝塞尔多曲线编辑Edge
  * 添加刚体可以锁定X/Y轴的功能
+ * 添加Shaper的Gizmo着色处理，静态动态物体的颜色不同。
  * 优化Engine只能放在场景层级最顶端，否则会出现Body先加载，导致找不到Engine的缺陷
- * 锚点以及偏移量问题修复，目前Node的锚点只能为（0.5，0.5），否则会出异常
  * 实现Spring Joint，以及优化各种Joint的接口
  * 将Effector里的Area,Constant,Point,Surface修复下
  * 将合并组件里的Wheel实现
@@ -28,18 +29,12 @@
  * 实现Engine的instance功能，场景中只能有一个Engine
  * 实现Bouyancy,Platform
  * 实现组合组件里的TopDwonCar
- * 设置多边形编辑为，点击“编辑”出现一些子节点可以编辑，结束编辑后删除子节点。
  * 为PackagePanel添加检测升级按钮，实现在菜单中检测插件版本，并升级到最新版
- * `（已完成）`尝试在Package的JS里加入写入文件的方法，然后实现在属性面板中编辑物理类型时，能通过Panel的JS写入到Enum中
- * 修复通过动画改变刚体位置时，如果有其他的刚体作为他的子物体，某种情况会出现异常
- * 为Joint添加DebugDraw
  * 完善文档以及API
  * 完善Demo
  -------------
  >发布1.0
  
- * 修复原生JSB无法正常Destory Node的BUG（是官方问题，待官方修复）
- * 待官方插件接口开放充足，在属性面板为各个组件添加一个Git示例
  * 同上，待属性面板支持修改后，将Engine的Category的运行方式由notify（每输入一次字符都会通知一次很饭）修改为按按钮发送修改事件。
  * 添加凹多边形支持
  * 添加根据图片纹理自动生成多边形顶点

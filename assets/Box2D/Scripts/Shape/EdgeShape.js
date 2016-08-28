@@ -24,8 +24,6 @@ window.EdgeShape = cc.Class({
             visible: false,
         },
         
-        editing: false,
-        
         vertexes: {
             default: [],
             type: [cc.Vec2],
@@ -48,7 +46,8 @@ window.EdgeShape = cc.Class({
         var vets = new Array(this.vertexes.length);
 
         for (var i = 0; i < this.vertexes.length; ++i) {
-            var v = new b2Vec2(this.vertexes[i].x / PTM_RATIO, this.vertexes[i].y / PTM_RATIO);
+            var v = new b2Vec2((this.vertexes[i].x + this.offset.x) / PTM_RATIO,
+                (this.vertexes[i].y + this.offset.y) / PTM_RATIO);
             vets[i] = v;
         }
 

@@ -7,6 +7,7 @@ class Shape {
         this.children = new Array();
         this.isRoot = false;
         this._position = [0, 0];
+        this._angle = 0;
         this._scale = 1;
         this._visible = true;
 
@@ -27,10 +28,8 @@ class Shape {
     }
 
     rotate(angle) {
-        this.shape.rotate(angle);
-        this.children.forEach(function (child) {
-            child.rotate(angle);
-        }, this);
+        this._angle = angle;
+        this.root.rotate(angle);
         return this;
     }
 
@@ -41,8 +40,8 @@ class Shape {
     }
 
     color(lineColor, fillColor) {
-        this.shape.stroke({ color: lineColor });
-        this.shape.fill(fillColor === undefined ? 'none' : { color: fillColor });
+        this.shape.stroke(lineColor === null ? 'none' : { color: lineColor });
+        this.shape.fill(fillColor === null ? 'none' : { color: fillColor });
         return this;
     }
 
@@ -55,8 +54,8 @@ class Shape {
 
     cursorStytle(cursorType, pointerArea) {
         this.shape.attr({
-            'pointer-events': pointerArea,
             'cursor': cursorType,
+            'pointer-events': pointerArea,
         });
         return this;
     }
@@ -156,9 +155,25 @@ class Polygon extends Shape {
         this.shape = close ? this.root.polygon(this._vertexes) : this.root.polyline(this._vertexes).fill('none').stroke({ width: 1 });
     }
 
-    vertexes(v) {
-        this._vertexes = v;
-        this.shape.plot(v);
+    // 多边形的中心点为了方便起见，就设置为第一个点的位置
+    _resize(anchor) {
+        //if (!this.isRoot)
+        //    this.shape.center(this.parent.shape.cx(), this.parent.shape.cy());
+        //else
+        //    this.shape.center(0, 0);
+
+        this.children.forEach(function (child) {
+            child.shape.center(child.parent.shape.cx(), child.parent.shape.cy());
+        }, this);
+    }
+
+    vertexes(vs) {
+        let _v = '';
+        vs.forEach(function (v) {
+            _v += v.x + ',' + v.y + ' ';
+        }, this);
+        this._vertexes = _v;
+        this.shape.plot(_v);
         this._resize();
         return this;
     }
@@ -179,4 +194,36 @@ class Path extends Shape {
         this._resize();
         return this;
     }
+}
+
+class Line extends Shape {
+
+    constructor(parent) {
+        super(parent);
+
+        this._start = [0, 0];
+        this._end = [100, 100],
+            this.shape = this.root.line(0, 0, 100, 100);
+    }
+
+    // 跟多边形一样，线段的中心点就是第一个点的位置，而不去矫正
+    _resize(anchor) {
+        //if (!this.isRoot)
+        //    this.shape.center(this.parent.shape.cx(), this.parent.shape.cy());
+        //else
+        //    this.shape.center(0, 0);
+
+        this.children.forEach(function (child) {
+            child.shape.center(child.parent.shape.cx(), child.parent.shape.cy());
+        }, this);
+    }
+
+    line(start, end) {
+        this._start = start;
+        this._end = end;
+        this.shape.plot(start.x, start.y, end.x, end.y);
+        this._resize();
+        return this;
+    }
+
 }

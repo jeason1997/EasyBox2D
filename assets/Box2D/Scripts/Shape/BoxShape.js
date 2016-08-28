@@ -24,8 +24,6 @@ window.BoxShape = cc.Class({
             visible: false,
         },
         
-        editing: false,
-        
         _size: cc.Vec2.ONE,
         size: {
             get: function() {

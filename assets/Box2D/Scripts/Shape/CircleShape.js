@@ -25,8 +25,6 @@ window.CircleShape = cc.Class({
             readonly: true,
         },
         
-        editing: false,
-        
         _radius: 50,
         radius: {
             get: function () {
