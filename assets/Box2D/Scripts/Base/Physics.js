@@ -55,6 +55,7 @@ window.b2GearJointDef = Box2D.b2GearJointDef;
 window.b2PrismaticJointDef = Box2D.b2PrismaticJointDef;
 window.b2FrictionJointDef = Box2D.b2FrictionJointDef;
 window.b2PulleyJointDef = Box2D.b2PulleyJointDef;
+//window.b2RopeJointDef = Box2D.b2RopeJointDef;
 
 /********************************************/
 

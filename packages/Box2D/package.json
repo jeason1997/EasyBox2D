@@ -24,6 +24,7 @@
     "CircleShape": "packages://box2d/gizmos/CircleShapeGizmo.js",
     "BoxShape": "packages://box2d/gizmos/BoxShapeGizmo.js",
     "EdgeShape": "packages://box2d/gizmos/EdgeShapeGizmo.js",
-    "PolygonShape": "packages://box2d/gizmos/PolygonShapeGizmo.js"
+    "PolygonShape": "packages://box2d/gizmos/PolygonShapeGizmo.js",
+    "DistanceJoint": "packages://box2d/gizmos/DistanceJoint.js"
   }
 }

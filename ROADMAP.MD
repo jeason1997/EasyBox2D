@@ -11,6 +11,7 @@
  * `BUG`由于获取Shape只是获取它的offer,所以如果Shape在子物体身上又没offer，位置会不对
  * `优化`添加Shape时，模式大小应该跟Node对应上，如果默认Node size为0，则赋予Shape大小默认值
  * 添加贝塞尔多曲线编辑Edge
+ * 将Distance Joint 跟 Spring Joint 改为 弹簧 与 绳子 节点
  * 添加刚体可以锁定X/Y轴的功能
  * 添加Shaper的Gizmo着色处理，静态动态物体的颜色不同。
  * 优化Engine只能放在场景层级最顶端，否则会出现Body先加载，导致找不到Engine的缺陷

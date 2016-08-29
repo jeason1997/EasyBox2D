@@ -6,7 +6,7 @@
  * Describe : 
  *************************************************/
 
-window.DistanceJoint = cc.Class({
+window.RopeJoint = cc.Class({
 
     extends: Joint,
 
@@ -34,11 +34,11 @@ window.DistanceJoint = cc.Class({
     start: function () {
         this.initJoint();
 
-        var jointDef = new b2DistanceJointDef();
+        var jointDef = new b2RopeJointDef();
         jointDef.bodyA = this.localBody;
         jointDef.bodyB = this.targetBody;
-        jointDef.localAnchorA = new b2Vec2(this.localAnchor.x / PTM_RATIO, this.localAnchor.y / PTM_RATIO);
-        jointDef.localAnchorB = new b2Vec2(this.targetAnchor.x / PTM_RATIO, this.targetAnchor.y / PTM_RATIO);
+        jointDef.localAnchorA = this.localAnchor;
+        jointDef.localAnchorB = this.targetAnchor;
         if (this.autoConfigureLength) {
             this.jointLength = cc.pDistance(this.localBody.GetPosition(), 
                 this.targetBody.GetPosition());

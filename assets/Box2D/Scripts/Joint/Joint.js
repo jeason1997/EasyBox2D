@@ -26,25 +26,12 @@ window.Joint = cc.Class({
             default: null,
             visible: false,
         },
-        localAnchor: {
-            default: new cc.Vec2(0, 0),
-            notify: function () {
-                this.updateDebugDraw();
-            },
-        },
+        localAnchor: cc.v2(0, 0),
         targetBody: {
             default: null,
             type: Body,
-            notify: function () {
-                this.updateDebugDraw();
-            },
         },
-        targetAnchor: {
-            default: new cc.Vec2(0, 0),
-            notify: function () {
-                this.updateDebugDraw();
-            },
-        },
+        targetAnchor: cc.v2(0, 0),
         breakForce: {
             default: -1,
             notify: function () {
@@ -92,25 +79,5 @@ window.Joint = cc.Class({
         Engine.instance.world.DestroyJoint(this.joint);
         this.getComponent(Body).removeContactEvent(ContactType.POST_CONTACT,
             this.onPostContact);
-    },
-    
-    updateDebugDraw: function() {
-        if (CC_EDITOR) {
-            if (!this._canvas) {
-                this._canvas = new cc.DrawNode();
-                this.node._sgNode.addChild(this._canvas);
-            }
-        
-            var local = this.node.position;
-            var target;
-            if (this.targetBody) {
-                target = this.targetBody.node.position;
-            } else {
-                target = cc.Vec2.ZERO;
-            }
-            
-            this._canvas.clear();
-            this._canvas.drawSegment(local, target, 2, new cc.Color(127, 229, 127, 255));
-        }
     },
 });
