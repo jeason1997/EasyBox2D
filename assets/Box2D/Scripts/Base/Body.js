@@ -79,6 +79,10 @@ window.Body = cc.Class({
             default: 1,
             notify: function() {},
         },
+        fixedRotation: {
+            default: false,
+            notify: function() {},
+        },
         Category: {
             default: 0,
             type: Physics.Category,
@@ -221,6 +225,8 @@ window.Body = cc.Class({
         for (var i = 0; i < fixtureList.length; ++i) {
             this.body.CreateFixture(fixtureList[i]);
         }
+        this.body.SetFixedRotation(this.fixedRotation);
+        this.body.m_gravityScale = this.gravityScale;
         this.body.SetUserData(this);
     },
 
