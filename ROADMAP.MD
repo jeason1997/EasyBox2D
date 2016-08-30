@@ -1,5 +1,6 @@
 #项目排期（按优先级排序）
 
+ * 尝试在属性面板以及Gizmo里使用Paper, 尝试在属性面板里使用Canvas,Webgl
  * 为Joint添加DebugDraw
  * 修改碰撞监听函数为Creator新版自带的EventHandle
  * `BUG`获取Shape时，现在可以获取多个Shape了，但EdgeShape还不能正常获得
